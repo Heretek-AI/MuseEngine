@@ -1,0 +1,177 @@
+[
+  {
+    "id": "mycelial_physarum",
+    "name": "Physarum Polycephalum (Slime Mold) Oscillatory Tube Network",
+    "source_domain": "Biophysics / Decentralized Morphogenesis",
+    "summary": "A brainless single-celled syncytium solves dynamic shortest-path and fault-tolerant network design via peristaltic cytoplasmic shuttle-streaming where tube diameter thickens nonlinearly with flux and prunes when starved.",
+    "mechanisms": [
+      "High Local Flux stretches wall to increase Conductivity (D^4 Poiseuille)",
+      "Low Flux triggers autophagic pruning of Redundant Links",
+      "Phase-Shifted Oscillations propagate global state without Central Coordinator"
+    ],
+    "invariants": [
+      "Zero global routing table; topology IS the memory",
+      "Oscillatory pressure waves prevent steady-state clogging"
+    ],
+    "operators": [
+      "Flux-proportional conduit dilation/pruning",
+      "Peristaltic phase-wave signaling without global clocks",
+      "Conservation-enforced resource reallocation"
+    ],
+    "failure_modes": [
+      "Premature lock-in if nonlinear reinforcement exponent is too steep"
+    ],
+    "tags": [
+      "clearance_bottleneck",
+      "coordination_overhead",
+      "routing_rigidity",
+      "single_point_of_failure"
+    ]
+  },
+  {
+    "id": "immune_clonal_thymic",
+    "name": "Adaptive Immune Repertoire & Thymic Negative Selection",
+    "source_domain": "Computational Immunology",
+    "summary": "Generates billions of stochastic receptor variants via V(D)J somatic hypermutation before pathogen encounter, filters self-reactive clones in a sandboxed thymus, and exponentially amplifies only nodes matching local danger + antigen signals.",
+    "mechanisms": [
+      "V(D)J Recombination pre-generates Speculative Detector Diversity",
+      "High Self-Affinity in Thymus induces apoptosis of Auto-Destructive Agents",
+      "Antigen + Tissue Danger Signal triggers clonal expansion of Matched Effectors"
+    ],
+    "invariants": [
+      "Two-factor activation: pattern match alone is inert without tissue stress context",
+      "Mutation rate scales inversely with fitness (somatic hypermutation on mismatch)"
+    ],
+    "operators": [
+      "Two-signal co-stimulation (Event + Local Stress Context)",
+      "Fitness-inverse mutation rate (hypermutate only when failing)",
+      "Shadow-thymus negative selection against self-harm"
+    ],
+    "failure_modes": [
+      "Autoimmune storm if co-stimulatory 'danger context' check is bypassed"
+    ],
+    "tags": [
+      "false_positive_damage",
+      "novel_threat_detection",
+      "speculative_exploration",
+      "toxic_accumulation"
+    ]
+  },
+  {
+    "id": "spin_glass_annealing",
+    "name": "Frustrated Spin Glass & Quantum/Thermal Tunneling Across Energy Barriers",
+    "source_domain": "Condensed Matter & Statistical Physics",
+    "summary": "In systems with competing local constraints (geometric frustration), no configuration satisfies all edges simultaneously. Escape from glassy local minima requires localized thermal/noise bursts and scale-free avalanche reorganizations.",
+    "mechanisms": [
+      "Competing Antiferromagnetic Bonds create Degenerate Ground-State Manifold",
+      "Localized Noise Injection destabilizes Metastable Trap",
+      "Domain Wall Propagation resolves Long-Range Constraint Deadlock"
+    ],
+    "invariants": [
+      "Global frustration cannot be eliminated, only concentrated into mobile domain walls",
+      "Cooling too fast guarantees brittle suboptimal lock-in"
+    ],
+    "operators": [
+      "Defect-routing (materialize conflicts as first-class mobile tokens)",
+      "Targeted stochastic heating of stalled/congested subgraphs",
+      "Degenerate ground-state switching"
+    ],
+    "failure_modes": [
+      "Quench disorder freezing the system into a brittle, high-stress glass"
+    ],
+    "tags": [
+      "consistency_vs_latency",
+      "deadlock_under_contention",
+      "local_minima_stagnation",
+      "protein_misfolding_trap"
+    ]
+  },
+  {
+    "id": "estuarine_tidal_flushing",
+    "name": "Estuarine Salt-Wedge Stratification & Tidal Pumping Clearance",
+    "source_domain": "Geophysical Fluid Dynamics / Marine Ecology",
+    "summary": "Estuaries clear heavy sediment and metabolic toxins without a unidirectional pump by coupling asymmetric tidal oscillations with density stratification and marsh-plain capacitance traps that separate inflow pathways from ebb-flush channels.",
+    "mechanisms": [
+      "Tidal Asymmetry (Ebb Dominance) creates net export of Aggregated Benthic Particulates",
+      "Shear Instability at Pycnocline entrains and dilutes Stagnant Deep Solutes",
+      "Side-Basin Phase Lag traps and settles Cohesive Flocs"
+    ],
+    "invariants": [
+      "Bidirectional oscillation achieves unidirectional net clearance via phase-lagged side capacitance",
+      "Below a critical shear threshold (Richardson number), stratified layers decouple and suffocate"
+    ],
+    "operators": [
+      "Rectified tidal ratcheting (oscillation + phase-lagged side capacitance = net directional transport)",
+      "Critical Richardson-number shear mixing across boundary layers",
+      "Biphasic flocculation window (optimal shear prevents both monomer stasis and mega-clump occlusion)"
+    ],
+    "failure_modes": [
+      "Eutrophic stratification lock-in when pulse amplitude drops below critical Richardson number"
+    ],
+    "tags": [
+      "backpressure_congestion",
+      "clearance_bottleneck",
+      "oscillatory_coupling",
+      "toxic_accumulation"
+    ]
+  },
+  {
+    "id": "baroque_fugue_stretto",
+    "name": "Polyphonic Fugue Counterpoint & Stretto Canon Compression",
+    "source_domain": "Music Theory / Temporal Information Architecture",
+    "summary": "Multiple autonomous voices execute the exact same thematic transformation at staggered time offsets and pitch inversions (canon/stretto), achieving maximal information density without harmonic collision by obeying strict interval-invariance rules.",
+    "mechanisms": [
+      "Oblique/Contrary Motion preserves perceptual independence of Concurrent Streams",
+      "Stretto Temporal Overlap compresses latency of Thematic Resolution",
+      "Dissonance Preparation + Resolution propels Forward Momentum"
+    ],
+    "invariants": [
+      "Contrary motion prevents phase-locked interference spikes",
+      "A slow invariant pedal-point allows fast upper layers to mutate freely"
+    ],
+    "operators": [
+      "Contrary-motion resource scheduling (when node A scales read-heavy, neighbor B shifts write-compaction)",
+      "Stretto staggered speculative execution",
+      "Pedal-point slow state anchor beneath volatile ephemeral streams"
+    ],
+    "failure_modes": [
+      "Homophonic mud when voices move in parallel lockstep at identical frequencies"
+    ],
+    "tags": [
+      "consistency_vs_latency",
+      "coordination_overhead",
+      "deadlock_under_contention",
+      "oscillatory_coupling"
+    ]
+  },
+  {
+    "id": "coral_reef_symbiosis",
+    "name": "Coral-Zooxanthellae Trophic Symbiosis & Calcified Micro-Habitats",
+    "source_domain": "Marine Community Ecology / Niche Construction",
+    "summary": "In nutrient-barren tropical waters (oligotrophic deserts), coral polyps build high-surface-area calcium carbonate architectures that trap light and recycle metabolic waste internally with symbiotic algae, creating a self-sustaining oasis.",
+    "mechanisms": [
+      "Rugose 3D Surface Geometry slows boundary flow to capture Scarce Ambient Attention/Nutrients",
+      "Internal Waste-to-Fuel Loop eliminates dependency on External Paid Acquisition",
+      "Modular Polyp Cloning compounds Surface Area Without Central Redesign"
+    ],
+    "invariants": [
+      "Every user output becomes structural habitat for the next user",
+      "Fractal progressive disclosure: calm macro-silhouette, rich micro-texture on hover/focus"
+    ],
+    "operators": [
+      "Niche calcification (turn ephemeral user actions into permanent public/shareable artifacts)",
+      "Symbiotic waste-to-fuel loop (one persona's byproduct is another persona's trigger)",
+      "Rugose progressive disclosure (calm macro-canvas that reveals tactile micro-tools on proximity)"
+    ],
+    "failure_modes": [
+      "Monoculture bleaching when sudden category shift invalidates a single acquisition channel"
+    ],
+    "tags": [
+      "attention_scarcity",
+      "cognitive_overload",
+      "retention_churn",
+      "trust_skepticism",
+      "visual_homogenization"
+    ]
+  }
+]
