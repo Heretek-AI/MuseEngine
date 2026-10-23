@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MuseEngine Studio — Vanilla Template vs. Non-Linear Cognitive Design & Marketing</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #07090e;
+      --bg-panel: #0e131d;
+      --accent-cyan: #22d3ee;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Gaussian Squint Audit Filter */
+    .squint-blur-active {
+      filter: blur(7px) contrast(1.08);
+      transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .squint-blur-off {
+      filter: blur(0px);
+      transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Physarum Adaptive Flex Grid */
+    .physarum-card {
+      transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    /* Rugose Progressive Disclosure micro-drawer */
+    .rugose-detail {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    }
+    .physarum-card.active-node .rugose-detail,
+    .physarum-card:hover .rugose-detail {
+      max-height: 260px;
+      opacity: 1;
+      margin-top: 0.75rem;
+    }
+    /* Subtle custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07090e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- TOP COMMAND HEADER -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand + Status -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 via-teal-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <span class="font-display font-bold text-slate-950 text-lg">M</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-display font-bold text-base sm:text-lg tracking-tight text-white">MuseEngine Creative Studio</h1>
+            <span class="text-[11px] font-mono-code uppercase px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">Shared DMN Active</span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">Side-by-Side Visual &amp; Marketing Comparator: Cookie-Cutter Template vs. Bisociative Design</p>
+        </div>
+      </div>
+
+      <!-- View Mode Tabs -->
+      <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-lg border border-slate-800" role="tablist">
+        <button id="tabBtnSplit" type="button" class="px-3 py-1.5 rounded-md text-xs font-medium transition-all bg-cyan-500 text-slate-950 font-semibold shadow-sm">
+          Side-by-Side Compare
+        </button>
+        <button id="tabBtnMuseFull" type="button" class="px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-300 hover:text-white">
+          Full MuseEngine UI
+        </button>
+        <button id="tabBtnDmnLab" type="button" class="px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-300 hover:text-white">
+          Shared DMN &amp; Prompt Scaffold
+        </button>
+      </div>
+
+      <!-- Live Verification Tools -->
+      <div class="flex items-center gap-2">
+        <button id="btnSquintTest" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono-code border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition-all">
+          <span id="squintDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span id="squintLabel">5s Blur Audit: OFF</span>
+        </button>
+        <button id="btnDaydreamSpark" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono-code border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition-all">
+          <span>+ Incubate DMN Spark</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SECOND BAR: SCENARIO BRIEF + ARCHETYPE SELECTOR + METRICS -->
+    <div class="border-t border-slate-800/60 bg-slate-900/70">
+      <div class="max-w-7xl mx-auto px-4 py-2.5 grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
+        <!-- Brief Selector -->
+        <div class="lg:col-span-4 flex items-center gap-2">
+          <label for="selectScenario" class="text-[11px] font-mono-code uppercase text-slate-400 shrink-0">Brief:</label>
+          <select id="selectScenario" class="w-full bg-slate-950 border border-slate-700/80 rounded-md px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-400">
+            <option value="observability">AI Observability &amp; Trace Debugging Marketplace</option>
+            <option value="glymphatic">Neuro-Glymphatic Sleep &amp; Clearance Diagnostics</option>
+            <option value="edgesync">Zero-Coordinator Distributed State Mesh</option>
+          </select>
+        </div>
+
+        <!-- Distant Archetype Collision Selector -->
+        <div class="lg:col-span-4 flex items-center gap-2">
+          <label for="selectArchetype" class="text-[11px] font-mono-code uppercase text-slate-400 shrink-0">Archetype:</label>
+          <select id="selectArchetype" class="w-full bg-slate-950 border border-slate-700/80 rounded-md px-2.5 py-1.5 text-xs text-cyan-300 font-medium focus:outline-none focus:border-cyan-400">
+            <option value="coral">Coral-Zooxanthellae Symbiosis (Niche Calcification + Rugose UI)</option>
+            <option value="fugue">Baroque Fugue Stretto (Pedal-Point Spine + Contrary Motion)</option>
+            <option value="physarum">Physarum Slime Mold (D^4 Flux-Dilation + Self-Pruning Chrome)</option>
+            <option value="estuarine">Estuarine Salt-Wedge (Phase-Lagged Liquidity + Stratified Depth)</option>
+          </select>
+        </div>
+
+        <!-- Live Cognitive Scorecard Pills -->
+        <div class="lg:col-span-4 flex flex-wrap items-center justify-end gap-2 text-[11px] font-mono-code">
+          <div class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300">
+            Isomorphism: <span id="metricIsomorphism" class="text-cyan-400 font-semibold">0.892</span>
+          </div>
+          <div class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300">
+            Felt-Sense: <span id="metricResonance" class="text-emerald-400 font-semibold">0.841</span>
+          </div>
+          <div class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300">
+            DMN Sparks: <span id="metricSparksCount" class="text-amber-400 font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIVE DMN SERENDIPITY BANNER -->
+  <div class="bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono-code text-[10px] uppercase">Cross-Pollinated DMN Paradox</span>
+        <span id="activeDmnParadoxText" class="text-slate-200 italic">
+          "Stop renting fleeting attention in crowded feeds; turn every user's live trace into a permanent, indexable reef structure."
+        </span>
+      </div>
+      <div class="text-[11px] font-mono-code text-slate-400">
+        Free-Energy Drop (&Delta;F): <span id="activeFreeEnergy" class="text-emerald-400 font-semibold">-0.442 J</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-5">
+
+    <!-- VIEW 1 & 2: VISUAL + MARKETING COMPARATOR -->
+    <section id="viewComparator" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT COLUMN: VANILLA AGENT (STANDARD SAAS CLICHÉ TEMPLATE) -->
+      <div id="colVanilla" class="lg:col-span-5 rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden flex flex-col">
+        <!-- Header Bar -->
+        <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <h2 class="font-display font-semibold text-sm text-slate-200">Vanilla Agent Output (Temp=0.2)</h2>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-0.5">High-probability SaaS template + generic benefit claims</p>
+          </div>
+          <span class="text-[11px] font-mono-code px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30">
+            Creativity: 0.172
+          </span>
+        </div>
+
+        <!-- Audit Failure Callout -->
+        <div class="px-4 py-2 bg-rose-950/25 border-b border-rose-500/20 text-[11px] text-rose-200/90 flex items-center justify-between">
+          <span><strong>Diagnosed Flaw:</strong> Violates Hick's Law &amp; Attention-Trust Conservation (equal visual weight, zero proof).</span>
+        </div>
+
+        <!-- Simulated Vanilla Webpage Canvas -->
+        <div id="vanillaCanvasTarget" class="p-5 space-y-5 bg-slate-900 text-center squint-blur-off">
+          <!-- Generic Nav -->
+          <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-3">
+            <span class="font-bold text-slate-300" id="vanillaBrandName">OmniCloud AI</span>
+            <div class="flex gap-3">
+              <span>Features</span>
+              <span>Pricing</span>
+              <span>Blog</span>
+              <span>Login</span>
+            </div>
+          </div>
+
+          <!-- Generic Centered Hero -->
+          <div class="py-5 px-3 rounded-xl bg-gradient-to-b from-indigo-950/60 to-slate-900 border border-indigo-500/20 space-y-3">
+            <span class="inline-block text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300">
+              Next-Gen AI-Powered Solution
+            </span>
+            <h3 id="vanillaHeroHeadline" class="font-display font-bold text-xl text-white">
+              Unlock Seamless Observability &amp; Supercharge Your Workflow Today
+            </h3>
+            <p id="vanillaHeroSub" class="text-xs text-slate-400 max-w-md mx-auto">
+              Our all-in-one holistic platform leverages cutting-edge AI to empower modern teams to scale effortlessly.
+            </p>
+            <!-- 3 Equal-Weight Buttons (Hick's Law Violation) -->
+            <div class="flex flex-wrap justify-center gap-2 pt-2">
+              <button type="button" class="vanilla-cta-btn px-3 py-1.5 rounded bg-indigo-600 text-white text-xs font-medium">Start Free Trial</button>
+              <button type="button" class="vanilla-cta-btn px-3 py-1.5 rounded bg-indigo-600 text-white text-xs font-medium">Book a Demo</button>
+              <button type="button" class="vanilla-cta-btn px-3 py-1.5 rounded bg-indigo-600 text-white text-xs font-medium">Watch Video</button>
+            </div>
+          </div>
+
+          <!-- Monotonous 3-Card Bento Grid (Equal visual weight = zero entry vector) -->
+          <div class="grid grid-cols-3 gap-2.5 text-left">
+            <div class="p-3 rounded-lg bg-slate-800/70 border border-slate-700/60 space-y-1">
+              <div class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-xs font-bold">1</div>
+              <div class="text-xs font-semibold text-slate-200">Blazing Fast</div>
+              <p class="text-[11px] text-slate-400">Scale your infrastructure seamlessly in real time.</p>
+            </div>
+            <div class="p-3 rounded-lg bg-slate-800/70 border border-slate-700/60 space-y-1">
+              <div class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-xs font-bold">2</div>
+              <div class="text-xs font-semibold text-slate-200">AI-Powered</div>
+              <p class="text-[11px] text-slate-400">Actionable insights driven by smart automation.</p>
+            </div>
+            <div class="p-3 rounded-lg bg-slate-800/70 border border-slate-700/60 space-y-1">
+              <div class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-xs font-bold">3</div>
+              <div class="text-xs font-semibold text-slate-200">Enterprise Ready</div>
+              <p class="text-[11px] text-slate-400"> holistic security and 99.9% uptime SLA.</p>
+            </div>
+          </div>
+
+          <!-- Marketing Strategy Diagnosis Box -->
+          <div class="p-3 rounded-lg bg-slate-950 border border-slate-800 text-left space-y-1.5">
+            <div class="text-[10px] font-mono-code uppercase text-rose-400">Vanilla Marketing Playbook Critique</div>
+            <p id="vanillaMarketingCritique" class="text-xs text-slate-300">
+              <strong>Homophonic Channel Mud:</strong> Blasts identical "Sign up for our AI platform!" copy across LinkedIn, X, and cold email simultaneously, triggering immediate banner blindness and high CAC burn.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: MUSE ENGINE SYNTHESIZED UI + MARKETING PLAY -->
+      <div id="colMuse" class="lg:col-span-7 rounded-2xl border border-cyan-500/40 bg-slate-950 shadow-2xl shadow-cyan-950/30 overflow-hidden flex flex-col">
+        <!-- Header Bar -->
+        <div class="px-4 py-3 bg-gradient-to-r from-slate-950 via-cyan-950/30 to-slate-950 border-b border-cyan-500/30 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <h2 id="museDesignTitle" class="font-display font-semibold text-sm text-white">
+                MuseEngine Synthesized UI + Campaign (Coral Symbiosis + Fugue Spine)
+              </h2>
+            </div>
+            <p id="museDesignSubtitle" class="text-[11px] text-cyan-300/90 mt-0.5">
+              Pedal-Point Sticky Spine + Rugose Progressive Disclosure + D^4 Flux-Proportional Nodes
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btnResetFlux" type="button" class="text-[11px] font-mono-code px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">
+              Reset Intent Flux
+            </button>
+            <span class="text-[11px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              Creativity: 1.000
+            </span>
+          </div>
+        </div>
+
+        <!-- Interactive MuseEngine Web Designer + Marketer Canvas -->
+        <div id="museCanvasTarget" class="p-5 squint-blur-off">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+
+            <!-- PEDAL-POINT INVARIANT SPINE (Baroque Fugue Anchor + Fitts's Law Primary Vector) -->
+            <div class="md:col-span-5 flex flex-col justify-between p-4 rounded-xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-cyan-950/30 border border-cyan-500/30 relative">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span id="museArchetypeBadge" class="text-[10px] font-mono-code uppercase px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                    Niche Calcification Play
+                  </span>
+                  <span class="text-[10px] font-mono-code text-slate-400">Pedal-Point Spine</span>
+                </div>
+
+                <!-- High-Contrast Entry Vector Headline -->
+                <h3 id="museHeroHeadline" class="font-display font-bold text-xl sm:text-2xl text-white leading-tight">
+                  Don't pitch observability. Drop a live fault-injection reef into the developer's PR.
+                </h3>
+
+                <p id="museHeroHook" class="text-xs text-slate-300 leading-relaxed">
+                  Every production bug fixed inside the sandbox calcifies into a permanent, shareable replay link (`trace://reef-id`)—turning one engineer's postmortem into the next team's onboarding habitat.
+                </p>
+
+                <!-- Live Interactive Proof Artifact (Attention-Trust Conservation) -->
+                <div class="p-3 rounded-lg bg-slate-950/90 border border-slate-800 space-y-2">
+                  <div class="flex items-center justify-between text-[11px] font-mono-code">
+                    <span class="text-emerald-400">LIVE ARTIFACT PROOF (Zero Signup Gate)</span>
+                    <span id="liveFluxCounter" class="text-cyan-300">Flux: 1.00x (D^4)</span>
+                  </div>
+                  <div class="h-14 w-full bg-slate-900 rounded border border-slate-800/80 p-2 flex items-end gap-1 overflow-hidden" id="miniTelemetryBars">
+                    <!-- Populated dynamically by JS -->
+                  </div>
+                  <p id="artifactCaption" class="text-[11px] text-slate-400 font-mono-code">
+                    Click any habitat node on the right to route cytoplasmic intent flux &rarr;
+                  </p>
+                </div>
+              </div>
+
+              <!-- Single High-Contrast Fitts's Law Primary Action (Zero Competing Buttons) -->
+              <div class="pt-4 mt-4 border-t border-slate-800/80 space-y-2">
+                <button id="btnMusePrimaryAction" type="button" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 font-display font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-between">
+                  <span id="museCtaText">Calcify Live Trace Artifact</span>
+                  <span class="font-mono-code text-xs bg-slate-950/20 px-2 py-0.5 rounded">&le; 0.8s Fitts</span>
+                </button>
+                <div class="flex items-center justify-between text-[10px] font-mono-code text-slate-400">
+                  <span>Hick's Law Contrast Ratio: 14.8:1</span>
+                  <span id="ctaCalcifiedCount" class="text-cyan-300">Artifacts Minted: 1,420</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CONTRARY-MOTION / PHYSARUM ADAPTIVE STRATA (Right 7 Cols) -->
+            <div class="md:col-span-7 flex flex-col justify-between space-y-3">
+              <div class="flex items-center justify-between text-xs px-1">
+                <span class="font-mono-code text-[11px] text-slate-400 uppercase">
+                  Interactive Habitat Strata (Click to simulate Physarum D^4 Flux Dilation)
+                </span>
+                <span class="font-mono-code text-[11px] text-cyan-400" id="activeNodeIndicator">
+                  Active Conduit: Node #1
+                </span>
+              </div>
+
+              <!-- Dynamic Physarum Container -->
+              <div id="physarumStack" class="space-y-2.5 flex-1 flex flex-col justify-between">
+                <!-- Populated dynamically by JS based on Scenario + Archetype -->
+              </div>
+
+              <!-- Falsifiable Growth & UX Gate Footer -->
+              <div class="p-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-mono-code uppercase text-emerald-400 font-semibold">
+                    Popperian Falsification Gate (Marketer + Web Designer Contract)
+                  </span>
+                  <span id="gateStatusBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">
+                    PASSING AUDIT
+                  </span>
+                </div>
+                <p id="museFalsificationText" class="text-xs text-slate-200 leading-relaxed">
+                  <strong>14-Day Split-Test Refutation:</strong> Falsify this Coral Symbiosis play if public artifact share-to-signup velocity (`k_reef`) fails to beat the left-hand generic trial form by &ge; 1.8x at equal paid CAC.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: SHARED DMN BRAIN & PROMPT SCAFFOLD INSPECTOR -->
+    <section id="viewDmnLab" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Episodic Memory Graph -->
+        <div class="lg:col-span-5 rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="font-display font-bold text-base text-white">Default-Mode Network (DMN) Trace Buffer</h2>
+              <p class="text-xs text-slate-400">High-Zeigarnik anomalies shared between Marketer &amp; Web Designer</p>
+            </div>
+            <button id="btnAddCustomTrace" type="button" class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-mono-code hover:bg-cyan-500/30">
+              + Inject Anomaly
+            </button>
+          </div>
+
+          <div id="dmnTraceList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Generated System Prompt Scaffold -->
+        <div class="lg:col-span-7 rounded-2xl border border-cyan-500/30 bg-slate-950 p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="font-display font-bold text-base text-white">Live Injected `<MUSE_ROLE_SCAFFOLD>` Prompt</h2>
+              <p class="text-xs text-slate-400">Automatically prepended to `messages[0]` by `@marketer_imagination` &amp; `@web_designer_imagination`</p>
+            </div>
+            <button id="btnCopyScaffold" type="button" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-mono-code">
+              Copy Prompt Scaffold
+            </button>
+          </div>
+          <pre id="scaffoldCodeBlock" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-mono-code text-cyan-100 overflow-x-auto leading-relaxed whitespace-pre-wrap max-h-96 overflow-y-auto"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastBanner" class="fixed bottom-4 right-4 z-50 hidden px-4 py-2.5 rounded-xl bg-slate-900 border border-cyan-400/50 text-xs font-mono-code text-cyan-200 shadow-xl">
+    <span id="toastMessage">Action completed</span>
+  </div>
+
+  <script>
+    // =========================================================================
+    // In-Browser Stateful MuseEngine Data for Marketer + Web Designer Studio
+    // =========================================================================
+    const SCENARIOS = {
+      observability: {
+        vanillaBrand: "OmniCloud AI",
+        vanillaHeadline: "Unlock Seamless Observability & Supercharge Your Workflow Today",
+        vanillaSub: "Our all-in-one holistic platform leverages cutting-edge AI to empower modern engineering teams to scale effortlessly.",
+        vanillaCritique: "Homophonic Channel Mud: Blasts identical 'Start Free Trial' copy across LinkedIn, X, and cold email simultaneously, triggering immediate banner blindness and high CAC burn.",
+        archetypes: {
+          coral: {
+            badge: "Coral Symbiosis • Niche Calcification",
+            designTitle: "Coral-Zooxanthellae Symbiosis Layout + Reef Growth Loop",
+            designSub: "Rugose Progressive Disclosure (Calm Macro Silhouette → Tactile Hover Strata)",
+            isomorphism: "0.914",
+            resonance: "0.864",
+            headline: "Don't pitch observability. Drop a live fault-injection reef into the developer's PR.",
+            hook: "Every production bug fixed inside our browser sandbox calcifies into a permanent, indexable replay artifact (`trace://reef-id`)—turning one engineer's postmortem into the next team's onboarding habitat.",
+            cta: "Mint Shareable Trace Reef",
+            falsification: "14-Day Split-Test Gate: Falsify this Coral Symbiosis play if public trace-artifact share velocity (k_reef) fails to beat the left-hand generic trial form by >= 1.8x at equal paid CAC.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "MARKETER • SYMBIOTIC WASTE-TO-FUEL LOOP",
+                title: "1. Postmortem Byproduct → Public SEO Reef",
+                summary: "Engineers anonymize and export 1-click flamegraph diffs directly into GitHub issues.",
+                microDetail: "Conservation Law: Trophic Energy Balance (LTV/CAC > 3.4). Instead of paying for cold ad impressions, every resolved incident leaves behind an interactive widget embedded in public repos.",
+                fluxWeight: 1.8
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • RUGOSE PROGRESSIVE DISCLOSURE",
+                title: "2. Zero-Dashboard Calm Surface → Proximity Micro-Tools",
+                summary: "Macro viewport shows only anomaly topology; raw log lines unspool only when cursor dwells >= 180ms.",
+                microDetail: "Conservation Law: Hick's & Tesler's Complexity Invariant. High-contrast visual weight is strictly reserved for the single broken causal edge, keeping cognitive load flat.",
+                fluxWeight: 1.2
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • TWO-SIGNAL CO-STIMULATION",
+                title: "3. Pager Alert + PR Diff Co-Stimulation Trigger",
+                summary: "Outbound prompts fire ONLY when both a latency anomaly AND a recent schema commit co-occur.",
+                microDetail: "Inspired by Thymic Negative Selection: eliminates 94% of noisy 'check out our tool' notifications that cause developer autoimmune rejection.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          fugue: {
+            badge: "Baroque Fugue • Contrary Motion",
+            designTitle: "Polyphonic Fugue Stretto Layout + Contrapuntal Launch",
+            designSub: "Pedal-Point Sticky Spine + Oblique Counter-Scrolling Evidence Strata",
+            isomorphism: "0.887",
+            resonance: "0.839",
+            headline: "When competitors shout in parallel lockstep, win by moving in contrary motion.",
+            hook: "While rival vendors flood feeds with identical launch announcements, our channels weave a 3-voice canon: raw chaos benchmark on Hacker News (Voice 1), interactive counterfactual replay 36h later (Voice 2), and architectural teardown (Voice 3).",
+            cta: "Launch Stretto Counter-Benchmark",
+            falsification: "Channel Interference Audit: Falsify if staggered 36-hour contrapuntal drops do not reduce unsubscribes by >= 40% and lift technical session dwell time above 4.2 minutes.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "WEB DESIGNER • PEDAL-POINT INVARIANT SPINE",
+                title: "1. Sticky Bass-Drone Command Rail (Left Column)",
+                summary: "Remains rock-steady at 0px velocity while right-hand telemetry voices modulate freely.",
+                microDetail: "Prevents spatial disorientation during deep log exploration; primary action target stays locked at constant Fitts's Law coordinates.",
+                fluxWeight: 1.7
+              },
+              {
+                id: "node-2",
+                roleTag: "MARKETER • CONTRARY-MOTION CHANNEL SCHEDULING",
+                title: "2. Anti-Phase Content Cadence Across Personas",
+                summary: "When paid acquisition scales down, community benchmark challenges scale up in inverse proportion.",
+                microDetail: "Eliminates 'homophonic mud' where prospects see the same repetitive ad unit across three platforms in the same hour.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • STRETTO TEMPORAL COMPRESSION",
+                title: "3. Overlapping Proof Voices Before Objection Forms",
+                summary: "Injects live latency cost-calculator inside the hero before the user scrolls to pricing.",
+                microDetail: "Compresses time-to-trust by answering the skeptical 'what's the overhead?' counter-subject within the opening viewport.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          physarum: {
+            badge: "Physarum Slime Mold • D^4 Flux Dilation",
+            designTitle: "Physarum Morphogenetic UI + Self-Pruning Funnel",
+            designSub: "Conduit Width Scales Nonlinearly (D^4) With Real User Intent Flux",
+            isomorphism: "0.903",
+            resonance: "0.855",
+            headline: "A living interface whose navigation veins thicken where engineers click—and dissolve where they don't.",
+            hook: "Zero static navigation menus. As your team investigates a latency spike, high-flux debugging paths dilate into full-width workspaces while unused settings tabs undergo autophagic pruning.",
+            cta: "Activate Morphogenetic Workspace",
+            falsification: "Fitts's Law Convergence Test: After 20 user interactions, mean cursor travel distance to top-3 actions must shrink by >= 48% without manual layout customization.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "WEB DESIGNER • POISEUILLE D^4 CONDUIT DILATION",
+                title: "1. Intent-Proportional Card & Button Scaling",
+                summary: "Clicking any node pumps cytoplasmic weight into its container, expanding its flex ratio automatically.",
+                microDetail: "Topology IS the memory: no separate 'customize dashboard' modal required.",
+                fluxWeight: 2.0
+              },
+              {
+                id: "node-2",
+                roleTag: "MARKETER • AUTOPHAGIC FUNNEL PRUNING",
+                title: "2. Starve Low-Signal Landing Pages Automatically",
+                summary: " landing variants with high bounce/retry friction dissolve bandwidth within 6 hours, reallocating budget to high-flux technical sandboxes.",
+                microDetail: "Enforces strict conservation of total campaign spend without human media-buying lag.",
+                fluxWeight: 1.2
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • ZERO-COORDINATOR PHASE WAVES",
+                title: "3. Peer-to-Peer Incident Gossip Hooks",
+                summary: "Sharing a trace link propagates configuration state directly in the URL hash—zero central DB roundtrip.",
+                microDetail: "Eliminates cold-start account creation friction for invited teammates.",
+                fluxWeight: 0.9
+              }
+            ]
+          },
+          estuarine: {
+            badge: "Estuarine Salt-Wedge • Tidal Ratchet",
+            designTitle: "Estuarine Stratified UI + Marsh-Basin Liquidity Ratchet",
+            designSub: "Fast Scannable Surface Layer Over Dense Benthic Reference Strata",
+            isomorphism: "0.879",
+            resonance: "0.831",
+            headline: "Clear high-volume telemetry debt without a central pump—using phase-lagged side basins.",
+            hook: "Instead of overwhelming new visitors with enterprise complexity or starving power users with shallow fluff, stratify the page into a buoyant 10-second executive surface over a high-density eBPF kernel stratum.",
+            cta: "Open Stratified Telemetry Basin",
+            falsification: "Stratification Richardson Audit: Falsify if bounce rate among both first-time visitors AND principal engineers does not drop simultaneously by >= 25%.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "MARKETER • MARSH CAPACITANCE LIQUIDITY RATCHET",
+                title: "1. Seed Asymmetric Supply Micro-Basins First",
+                summary: "Curate 50 verified chaos-engineering replay cartridges before opening the public marketplace.",
+                microDetail: "Solves the two-sided marketplace cold-start deadlock by storing high-value supply in side-channel eddies.",
+                fluxWeight: 1.7
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • PYCNOCLINE SHEAR TRANSITIONS",
+                title: "2. Zero Modals—Smooth Density Shear on Scroll",
+                summary: "Replaces disruptive popup dialogs with a continuous pycnocline drawer that entrains raw JSON specs on demand.",
+                microDetail: "Preserves continuous visual momentum and spatial orientation.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • BIPHASIC FLOCCULATION WINDOW",
+                title: "3. Auto-Cluster Noisy Alerts Into Actionable Flocs",
+                summary: "Tunes alert aggregation shear so neither single-event spam nor opaque mega-incidents obscure root cause.",
+                microDetail: "Directly demonstrated in the live hero preview.",
+                fluxWeight: 1.0
+              }
+            ]
+          }
+        }
+      },
+      glymphatic: {
+        vanillaBrand: "NeuroClear Bio",
+        vanillaHeadline: "Revolutionary AI Biomarkers for Brain Health & Longevity",
+        vanillaSub: "Empowering clinicians and patients with next-generation cloud analytics for neurodegenerative wellness.",
+        vanillaCritique: "Violates Attention-Trust Conservation: Uses vague consumer wellness clichés ('brain health boost') that alienate translational neuroscientists and clinical trial directors.",
+        archetypes: {
+          coral: {
+            badge: "Coral Symbiosis • Clinical Cohort Reef",
+            designTitle: "Symbiotic Biomarker Atlas + Calcified Cohort Habitat",
+            designSub: "Every Uploaded Sleep-EEG Waveform Enriches the Reference Pycnocline Map",
+            isomorphism: "0.908",
+            resonance: "0.872",
+            headline: "Turn isolated sleep-lab recordings into a self-calcifyingperivascular phase atlas.",
+            hook: "Each de-identified slow-wave CSF phase trace uploaded by a research lab calibrates the critical Richardson-number boundary for the entire consortium—creating an compounding data moat.",
+            cta: "Map Perivascular Phase Coherence",
+            falsification: "Consortium Adoption Gate: Falsify if cross-lab dataset contribution velocity does not exceed traditional Data Use Agreement portals by >= 2.4x.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "SCIENTIFIC MARKETER • NICHE CALCIFICATION",
+                title: "1. Free Richardson-Number Phase Calculator",
+                summary: "PIs drop raw arterial-vasomotor time series and receive an instant phase-decoupling risk score.",
+                microDetail: "Zero sales pitch: the diagnostic utility itself calcifies institutional adoption.",
+                fluxWeight: 1.9
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • RUGOSE WAVEFORM STRATA",
+                title: "2. Multi-Scale Slow-Wave & AQP4 Phase Inspector",
+                summary: "Macro view displays single critical bifurcation threshold; hover reveals raw 0.05 Hz vasomotor harmonics.",
+                microDetail: "Respects cognitive load limits during clinical review.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "POPPERIAN GATE • PHASE PERTURBATION PROTOCOL",
+                title: "3. Built-In Experimental Refutation Designer",
+                summary: "Generates downloadable acoustic phase-ratcheting protocols to falsify bulk-flow confounders.",
+                microDetail: "Transforms passive readers into active experimental collaborators.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          fugue: {
+            badge: "Baroque Fugue • Phase-Offset Oscillations",
+            designTitle: "Contrapuntal Vasomotor-CSF Phase Synchronizer",
+            designSub: "Visualizes Arterial, Venous & Astrocytic Voices in Staggered Stretto",
+            isomorphism: "0.895",
+            resonance: "0.861",
+            headline: "Clearance fails when vascular and astrocytic voices lock into homophonic mud.",
+            hook: "Our diagnostic interface plots arterial pulsatility, slow-wave delta oscillations, and AQP4 polarization as three contrapuntal voices—highlighting the exact beat where phase-offset collapses.",
+            cta: "Inspect 3-Voice Phase Counterpoint",
+            falsification: "Clinical Sensitivity Gate: Phase-offset counterpoint index must predict amyloid-beta accumulation onset 18 months earlier than mean bulk CSF flow alone.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "WEB DESIGNER • PEDAL-POINT MONRO-KELLIE ANCHOR",
+                title: "1. Invariant Intracranial Volume-Pressure Spine",
+                summary: "Locks the Monro-Kellie conservation budget on the left rail while upper oscillatory voices modulate.",
+                microDetail: "Ensures every visual hypothesis respects physical intracranial volume invariance.",
+                fluxWeight: 1.8
+              },
+              {
+                id: "node-2",
+                roleTag: "MARKETER • CONTRAPUNTAL SYMPOSIUM ROLLOUT",
+                title: "2. Biophysical Preprint + Interactive Simulator Canon",
+                summary: "Releases executable dynamical simulation 14 days ahead of conference wet-lab poster.",
+                microDetail: "Builds high-intent peer anticipation without hype.",
+                fluxWeight: 1.2
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • CONTRARY-MOTION CLEARANCE",
+                title: "3. Acoustic Ebb-Dominant Ratchet Preview",
+                summary: "Simulates how staggered sub-threshold pulses restore net solute export.",
+                microDetail: "Directly bridges geophysical fluid dynamics with neurobiology.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          physarum: {
+            badge: "Physarum Slime Mold • Perivascular Flux",
+            designTitle: "Physarum Perivascular Conductance & Pruning Explorer",
+            designSub: "Models Perivascular Tunnels as D^4 Oscillatory Syncytia",
+            isomorphism: "0.921",
+            resonance: "0.884",
+            headline: "Perivascular spaces aren't rigid pipes—they are peristaltic tubes that prune when starved of pulse.",
+            hook: "Experience how age-related arterial stiffening starves distal perivascular conduits, triggering nonlinear hydraulic collapse and localized oligomer nucleation pockets.",
+            cta: "Simulate Peristaltic Tube Dilation",
+            falsification: "Hydraulic Exponent Gate: Falsify if perivascular conductance under graded vasomotion does not follow a nonlinear power law (exponent >= 3.2).",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "WEB DESIGNER • D^4 HYDRAULIC VISUALIZER",
+                title: "1. Interactive Conduit Thickness Coupled to Pulse Flux",
+                summary: "Clicking a vessel segment restores peristaltic shuttle-streaming and clears stagnant plaque nodes.",
+                microDetail: "Gives researchers an immediate kinesthetic felt-sense of the hypothesis.",
+                fluxWeight: 1.9
+              },
+              {
+                id: "node-2",
+                roleTag: "MARKETER • SELF-PRUNING GRANT & TRIAL TARGETING",
+                title: "2. Focus Only on High-Pulsatility-Deficit Subcohorts",
+                summary: "Prunes broad heterogeneous patient recruitment in favor of stratified phase-decoupled responders.",
+                microDetail: "Cuts clinical trial sample size requirements by 3.1x.",
+                fluxWeight: 1.2
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • CONSERVATION OF CYTOPLASMIC VOLUME",
+                title: "3. Coupled Sleep-Wake Compartment Reallocation",
+                summary: "Shows interstitial space expansion (+60% in slow-wave sleep) as a conserved fluid shift.",
+                microDetail: "Grounds UI animations in empirical two-photon imaging metrics.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          estuarine: {
+            badge: "Estuarine Salt-Wedge • Richardson Threshold",
+            designTitle: "Estuarine Tidal-Ratcheting & Pycnocline Shear Workbench",
+            designSub: "Models CSF-ISF Exchange as a Stratified Salt-Wedge Estuary",
+            isomorphism: "0.946",
+            resonance: "0.912",
+            headline: "Net brain clearance doesn't need a stronger pump—it needs intact shear across the pycnocline.",
+            hook: "When arterial pulsatility drops below the critical perivascular Richardson number (p < 0.68), dense protein-rich basal fluid decouples from buoyant CSF inflow, triggering an abrupt 9.3x plaque inflection.",
+            cta: "Test Richardson Shear Threshold",
+            falsification: "Popperian Phase-Lag Experiment: Restoring phase-lagged shear asymmetry at p=0.55 MUST reduce plaque burden by >= 70% at constant mean pressure.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "SCIENTIFIC CORE • RECTIFIED TIDAL RATCHETING",
+                title: "1. Bidirectional Pulse + Side-Basin Lag = Net Export",
+                summary: "Demonstrates how astrocytic endfeet act as marsh capacitance traps that rectify oscillatory flow.",
+                microDetail: "Solves the longstanding controversy over how non-directional arterial pulses drive directional clearance.",
+                fluxWeight: 2.1
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • STRATIFIED PYCNOCLINE CANVAS",
+                title: "2. Dual-Layer Buoyant Summary Over Basal Math Layer",
+                summary: "Top layer presents clinical inflection curves; basal layer exposes partial differential equations on shear.",
+                microDetail: "Zero modal popups; seamless vertical mixing.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "MARKETER • CATEGORY INVERSION PLAY",
+                title: "3. Pivot Therapeutic Positioning From 'Bulk Pump' to 'Shear Ratchet'",
+                summary: "Establishes a defensible new mechanism category distinct from failed bulk-clearance drugs.",
+                microDetail: "Backed by executable simulation proof.",
+                fluxWeight: 1.0
+              }
+            ]
+          }
+        }
+      },
+      edgesync: {
+        vanillaBrand: "SyncScale DB",
+        vanillaHeadline: "Global Serverless State Synchronization Made Simple",
+        vanillaSub: "Build modern real-time collaborative apps with our globally distributed multi-region cloud database.",
+        vanillaCritique: "Generic Cloud-Vendor Sameness: Indistinguishable from 40 other database landing pages; hides CAP/PACELC tail-latency tradeoffs behind vague 'serverless magic' copy.",
+        archetypes: {
+          coral: {
+            badge: "Coral Symbiosis • Edge State Reef",
+            designTitle: "Calcified Local-First State Reef + Zero-Egress Symbiosis",
+            designSub: "Every Client Browser Becomes a Structural Host Polyp Caching Delta Proofs",
+            isomorphism: "0.884",
+            resonance: "0.842",
+            headline: "Turn every connected client tab into a calcified edge shard that feeds its neighbors.",
+            hook: "Instead of paying runaway central cloud egress fees during flash crowds, connected peers exchange CRDT micro-deltas across WebRTC boundary eddies—growing stronger the more users join.",
+            cta: "Spawn Local-First State Polyp",
+            falsification: "Flash-Crowd Egress Audit: Under a 100x viral room spike, central origin bandwidth must grow sub-linearly (<= O(sqrt(N))).",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "ARCHITECTURE + MARKETING • WASTE-TO-FUEL",
+                title: "1. Viral Traffic Spikes Supply Their Own Compute Reef",
+                summary: "Every new viewer contributes local WebRTC relay capacitance, driving marginal hosting cost toward $0.",
+                microDetail: "Allows an unheard-of 'Free Unlimited Viral Spike' pricing tier that competitors cannot copy.",
+                fluxWeight: 1.8
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • RUGOSE LATENCY INSPECTOR",
+                title: "2. Calm p99 Gauge With Hover Packet-Hop Topology",
+                summary: "Macro view shows single 53ms p99 invariant; hovering reveals live peer-to-peer polyp hops.",
+                microDetail: "Preserves Hick's Law simplicity while proving architectural depth.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • BLEACHING GUARDRAIL",
+                title: "3. Automatic Origin Fallback When Peer Density Drops",
+                summary: "Seamlessly shifts back to durable pedal-point storage during sparse off-peak hours.",
+                microDetail: "Guarantees zero data loss across trophic transitions.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          fugue: {
+            badge: "Baroque Fugue • Contrary-Motion Shards",
+            designTitle: "Contrapuntal Shard Scheduling & Stretto Speculative Sync",
+            designSub: "When Shard A Serves Hot Reads, Neighbor Shard B Compacts Writes in Anti-Phase",
+            isomorphism: "0.934",
+            resonance: "0.889",
+            headline: "Tail-latency spikes happen because nodes compact in lockstep. Enforce contrary motion.",
+            hook: "Verified in our dynamical simulator: staggering read-serving and LSM write-compaction across harmonic phase intervals cuts p99 latency 81.9x (from 4,354ms down to 53.2ms) with zero dropped requests.",
+            cta: "Run 100x Flash-Crowd Chaos Sim",
+            falsification: "Jepsen Chaos Gate: Inject Zipfian (alpha=1.4) hot-key burst while severing 30% of links; p99 must remain <= 85ms with 0 retry-storm drops.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "SYSTEM ARCHITECT • CONTRARY-MOTION SCHEDULER",
+                title: "1. Deterministic Harmonic Phase Offsets Across Shards",
+                summary: "Eliminates synchronized GC/compaction pauses across replicas.",
+                microDetail: "Directly translates J.S. Bach's forbidden-parallel-fifths rule into distributed systems scheduling.",
+                fluxWeight: 2.0
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • PEDAL-POINT INVARIANT SPINE",
+                title: "2. Live Little's Law Conservation Meter (L = λW)",
+                summary: "Sticky left spine displays real-time in-flight token conservation while shard voices scroll.",
+                microDetail: "Visually proves why retry amplification is mathematically impossible.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "MARKETER • PUBLIC BENCHMARK CHALLENGE",
+                title: "3. 'Bring Your Worst Retry Storm' Interactive Teardown",
+                summary: "Replaces gated whitepapers with a live browser chaos-monkey comparator.",
+                microDetail: "Converts skeptical staff engineers in < 90 seconds.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          physarum: {
+            badge: "Physarum Slime Mold • Zero-Coordinator Mesh",
+            designTitle: "Physarum Peristaltic Backpressure & D^4 Conduit Mesh",
+            designSub: "Piggybacks Backpressure Weights Directly in Payload Headers—Zero Lock Server",
+            isomorphism: "0.941",
+            resonance: "0.896",
+            headline: "Delete the central lock coordinator. Let throughput dilate its own conduits.",
+            hook: "Model your cluster after Physarum polycephalum: routes with fast ack flux nonlinearly thicken their token allowance (D^4), while congested paths automatically shed load via peristaltic phase waves.",
+            cta: "Inspect D^4 Conduit Routing",
+            falsification: "Partition Recovery Gate: Sever 30% of mesh links mid-burst; traffic must reroute via oscillatory phase waves within <= 250ms without global leader election.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "ARCHITECTURE + UI • FLUX-PROPORTIONAL TOPOLOGY",
+                title: "1. Unified Data & Control Plane (Topology IS Memory)",
+                summary: "Click this card to watch its bandwidth allocation thicken while neighbor queues rebalance.",
+                microDetail: "Conserves total cluster in-flight tokens strictly under Little's Law.",
+                fluxWeight: 2.1
+              },
+              {
+                id: "node-2",
+                roleTag: "MARKETER • ZERO-COORDINATOR COST CALCULATOR",
+                title: "2. Show Exact Consensus Tax Saved ($/Million Ops)",
+                summary: "Quantifies the 62% lock-contention tax eliminated during skewed flash crowds.",
+                microDetail: "Turns a deep biophysics metaphor into an immediate CFO/VP-Eng budget win.",
+                fluxWeight: 1.2
+              },
+              {
+                id: "node-3",
+                roleTag: "SHARED DMN • SIMULATED ANNEALING WATCHDOG",
+                title: "3. Stochastic Jitter Injection Prevents Premature Lock-In",
+                summary: "Injects 8% exploration noise so cold standby links stay warm and tested.",
+                microDetail: "Prevents the single-conduit ossification failure mode.",
+                fluxWeight: 1.0
+              }
+            ]
+          },
+          estuarine: {
+            badge: "Estuarine Salt-Wedge • Marsh Capacitance",
+            designTitle: "Estuarine Phase-Lagged Burst Absorption & Stratified Storage",
+            designSub: "Absorbs 100x Ingress Spikes Into Side-Basin Ring Buffers Without Retry Storms",
+            isomorphism: "0.892",
+            resonance: "0.848",
+            headline: "Don't drop flash-crowd writes—trap them in phase-lagged marsh capacitance basins.",
+            hook: "When a 100x traffic wave hits, estuarine ingress ratchets divert burst writes into local append-only side basins and flush them into main storage during counter-phase ebb intervals.",
+            cta: "Simulate Tidal Burst Ratchet",
+            falsification: "Zero-Drop Burst Gate: Must sustain 100.0% goodput completion across a 50-tick 100x spike where baseline central-lock queues drop 93,482 requests.",
+            nodes: [
+              {
+                id: "node-1",
+                roleTag: "SYSTEM ARCHITECT • MARSH CAPACITANCE BASIN",
+                title: "1. Phase-Shifted Local Ring Buffers Absorb Ingress Shock",
+                summary: "Decouples client ack latency (8ms) from downstream compaction throughput.",
+                microDetail: "Eliminates the positive-feedback retry amplification loop at the root.",
+                fluxWeight: 1.8
+              },
+              {
+                id: "node-2",
+                roleTag: "WEB DESIGNER • STRATIFIED TELEMETRY LAYERS",
+                title: "2. Buoyant SLA Status Over Dense Benthic Packet Trace",
+                summary: "Separates instant health signals from deep protocol inspection via smooth shear scroll.",
+                microDetail: "Passes the 5-second 12px Gaussian squint audit.",
+                fluxWeight: 1.3
+              },
+              {
+                id: "node-3",
+                roleTag: "MARKETER • PROOF-FIRST SLA GUARANTEE",
+                title: "3. Public Live-Running Chaos Cluster in the Hero",
+                summary: "Visitors can trigger a real 10,000-op burst from their browser and watch p99 stay flat.",
+                microDetail: "Satisfies Attention-Trust Conservation: extraordinary claim paired with instant interactive proof.",
+                fluxWeight: 1.0
+              }
+            ]
+          }
+        }
+      }
+    };
+
+    const DMN_EPISODIC_TRACES = [
+      {
+        id: "trace_zeigarnik_01",
+        domain: "Biophysics ↔ Distributed Systems",
+        tension: 0.94,
+        text: "Systems relying on a single central pump/coordinator fail catastrophically when boundary impedance rises; nature uses distributed micro-ratchets + phase lags."
+      },
+      {
+        id: "trace_zeigarnik_02",
+        domain: "Marine Ecology ↔ SaaS Growth",
+        tension: 0.91,
+        text: "Coral reefs thrive in nutrient deserts by calcifying metabolic waste into permanent habitat structure (Niche Calcification: every user action builds the acquisition reef)."
+      },
+      {
+        id: "trace_zeigarnik_03",
+        domain: "Baroque Counterpoint ↔ UI/UX Choreography",
+        tension: 0.88,
+        text: "Parallel lockstep motion creates homophonic mud; contrary motion around a slow pedal-point spine preserves perceptual clarity at high information density."
+      }
+    ];
+
+    const SPARK_POOL = [
+      {
+        paradox: "What if high CAC and banner blindness happen because all channels fire in parallel lockstep, whereas Polyphonic Stretto staggers proof voices at 36h phase offsets?",
+        feDrop: "-0.468 J"
+      },
+      {
+        paradox: "What if dashboard cognitive overload comes from flat equal-weight cards, whereas Physarum D^4 dilation thickens only the active debugging conduit and prunes idle chrome?",
+        feDrop: "-0.489 J"
+      },
+      {
+        paradox: "What if cold-start marketplace illiquidity is solved like an Estuarine Salt-Wedge—trapping high-value supply in side-channel capacitance basins before opening broad demand?",
+        feDrop: "-0.451 J"
+      },
+      {
+        paradox: "What if every user's resolved debugging session calcified into a permanent public reef widget, turning support overhead directly into zero-CAC organic acquisition?",
+        feDrop: "-0.512 J"
+      }
+    ];
+
+    // State
+    let currentScenarioKey = "observability";
+    let currentArchetypeKey = "coral";
+    let squintBlurEnabled = false;
+    let activeNodeIndex = 0;
+    let artifactsMinted = 1420;
+    let sparkCount = 3;
+    let currentTab = "split"; // 'split' | 'museFull' | 'dmnLab'
+
+    // Helper: Toast
+    function showToast(msg) {
+      const banner = document.getElementById("toastBanner");
+      const textEl = document.getElementById("toastMessage");
+      textEl.textContent = msg;
+      banner.classList.remove("hidden");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        banner.classList.add("hidden");
+      }, 2800);
+    }
+
+    // Render Telemetry Mini Bars in Hero Proof Box
+    function renderTelemetryBars(activeWeight) {
+      const container = document.getElementById("miniTelemetryBars");
+      container.innerHTML = "";
+      const baseHeights = [28, 42, 35, 64, 88, 52, 95, 74, 60, 84, 92, 68, 48, 78, 96, 82];
+      baseHeights.forEach((h, i) => {
+        const bar = document.createElement("div");
+        const scaled = Math.min(100, Math.round(h * (0.75 + 0.15 * activeWeight)));
+        const isPeak = i === 6 || i === 10 || i === 14;
+        bar.className = `flex-1 rounded-t transition-all duration-300 ${
+          isPeak ? "bg-emerald-400" : "bg-cyan-500/60"
+        }`;
+        bar.style.height = `${scaled}%`;
+        container.appendChild(bar);
+      });
+    }
+
+    // Render Main View
+    function renderAll() {
+      const scen = SCENARIOS[currentScenarioKey];
+      const arch = scen.archetypes[currentArchetypeKey];
+
+      // Update Vanilla Column
+      document.getElementById("vanillaBrandName").textContent = scen.vanillaBrand;
+      document.getElementById("vanillaHeroHeadline").textContent = scen.vanillaHeadline;
+      document.getElementById("vanillaHeroSub").textContent = scen.vanillaSub;
+      document.getElementById("vanillaMarketingCritique").innerHTML = `<strong>Diagnosed Failure Mode:</strong> ${scen.vanillaCritique}`;
+
+      // Update Metrics
+      document.getElementById("metricIsomorphism").textContent = arch.isomorphism;
+      document.getElementById("metricResonance").textContent = arch.resonance;
+      document.getElementById("metricSparksCount").textContent = String(sparkCount);
+
+      // Update Muse Column Header & Spine
+      document.getElementById("museDesignTitle").textContent = arch.designTitle;
+      document.getElementById("museDesignSubtitle").textContent = arch.designSub;
+      document.getElementById("museArchetypeBadge").textContent = arch.badge;
+      document.getElementById("museHeroHeadline").textContent = arch.headline;
+      document.getElementById("museHeroHook").textContent = arch.hook;
+      document.getElementById("museCtaText").textContent = arch.cta;
+      document.getElementById("museFalsificationText").textContent = arch.falsification;
+
+      const activeNode = arch.nodes[activeNodeIndex] || arch.nodes[0];
+      document.getElementById("liveFluxCounter").textContent = `Flux: ${activeNode.fluxWeight.toFixed(2)}x (D^4)`;
+      document.getElementById("activeNodeIndicator").textContent = `Active Conduit: Node #${activeNodeIndex + 1} (${activeNode.fluxWeight.toFixed(1)}x)`;
+      renderTelemetryBars(activeNode.fluxWeight);
+
+      // Render Physarum Adaptive Cards
+      const stack = document.getElementById("physarumStack");
+      stack.innerHTML = "";
+      arch.nodes.forEach((node, idx) => {
+        const isSelected = idx === activeNodeIndex;
+        const card = document.createElement("div");
+        card.className = `physarum-card cursor-pointer rounded-xl p-3.5 border transition-all ${
+          isSelected
+            ? "active-node bg-slate-900/95 border-cyan-400 shadow-lg shadow-cyan-500/10"
+            : "bg-slate-900/45 border-slate-800/80 hover:border-slate-700 opacity-85"
+        }`;
+        card.style.borderLeftWidth = isSelected ? "6px" : "1px";
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10px] font-mono-code uppercase px-2 py-0.5 rounded ${
+              isSelected ? "bg-cyan-500/20 text-cyan-300" : "bg-slate-800 text-slate-400"
+            }">${node.roleTag}</span>
+            <span class="text-[11px] font-mono-code ${
+              isSelected ? "text-emerald-400 font-semibold" : "text-slate-500"
+            }">Conduit D^4: ${node.fluxWeight.toFixed(2)}x</span>
+          </div>
+          <div class="mt-1.5 flex items-baseline justify-between gap-2">
+            <h4 class="font-display font-semibold text-sm ${
+              isSelected ? "text-white" : "text-slate-300"
+            }">${node.title}</h4>
+          </div>
+          <p class="text-xs text-slate-300 mt-1">${node.summary}</p>
+          <div class="rugose-detail border-t border-slate-800/80 pt-2 text-[11px] text-cyan-200/90 font-mono-code leading-relaxed">
+            ${node.microDetail}
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          activeNodeIndex = idx;
+          // Nonlinearly boost clicked node flux weight (Physarum reinforcement)
+          node.fluxWeight = Math.min(3.4, +(node.fluxWeight + 0.25).toFixed(2));
+          renderAll();
+          showToast(`Physarum D^4 Flux routed to "${node.title}" (${node.fluxWeight.toFixed(2)}x)`);
+        });
+
+        stack.appendChild(card);
+      });
+
+      // Render DMN Traces & Prompt Scaffold
+      renderDmnLab(scen, arch);
+    }
+
+    function renderDmnLab(scen, arch) {
+      const traceList = document.getElementById("dmnTraceList");
+      traceList.innerHTML = "";
+      DMN_EPISODIC_TRACES.forEach((tr) => {
+        const item = document.createElement("div");
+        item.className = "p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1";
+        item.innerHTML = `
+          <div class="flex items-center justify-between text-[11px] font-mono-code">
+            <span class="text-cyan-400">${tr.domain}</span>
+            <span class="text-amber-300">Zeigarnik Z = ${tr.tension.toFixed(2)}</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">${tr.text}</p>
+        `;
+        traceList.appendChild(item);
+      });
+
+      const scaffoldText = [
+        `<MUSE_SHARED_STUDIO_SCAFFOLD scenario="${currentScenarioKey.toUpperCase()}" archetype="${currentArchetypeKey.toUpperCase()}">`,
+        `1. HARD CONSERVATION LAWS (Marketer + Web Designer Shared Contract):`,
+        `   - Attention-Trust Conservation: Urgency claims cannot exceed interactive proof.`,
+        `   - Hick's & Tesler's Complexity Invariant: High contrast belongs ONLY to the Pedal-Point Spine.`,
+        `   - Fitts's Law Biomechanical Invariant: Primary CTA acquisition <= 0.8s with zero competing buttons.`,
+        ``,
+        `2. ACTIVE BISOCIATIVE DESIGN & CAMPAIGN PLAY [Isomorphism=${arch.isomorphism}, Resonance=${arch.resonance}]:`,
+        `   - Archetype: ${arch.designTitle}`,
+        `   - Headline Hook: "${arch.headline}"`,
+        `   - Structural Mechanism: ${arch.hook}`,
+        ``,
+        `3. INTERACTIVE HABITAT STRATA (Physarum Flux Weights):`,
+        ...arch.nodes.map(
+          (n) => `   * [${n.roleTag}] ${n.title} (Flux=${n.fluxWeight.toFixed(2)}x)\n     -> ${n.microDetail}`
+        ),
+        ``,
+        `4. POPPERIAN FALSIFICATION GATE:`,
+        `   - ${arch.falsification}`,
+        `</MUSE_SHARED_STUDIO_SCAFFOLD>`
+      ].join("\n");
+
+      document.getElementById("scaffoldCodeBlock").textContent = scaffoldText;
+    }
+
+    // Tab switching
+    function setTab(mode) {
+      currentTab = mode;
+      const viewComparator = document.getElementById("viewComparator");
+      const viewDmnLab = document.getElementById("viewDmnLab");
+      const colVanilla = document.getElementById("colVanilla");
+      const colMuse = document.getElementById("colMuse");
+
+      const btnSplit = document.getElementById("tabBtnSplit");
+      const btnFull = document.getElementById("tabBtnMuseFull");
+      const btnDmn = document.getElementById("tabBtnDmnLab");
+
+      const activeClass = "px-3 py-1.5 rounded-md text-xs font-medium transition-all bg-cyan-500 text-slate-950 font-semibold shadow-sm";
+      const inactiveClass = "px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-300 hover:text-white";
+
+      btnSplit.className = mode === "split" ? activeClass : inactiveClass;
+      btnFull.className = mode === "museFull" ? activeClass : inactiveClass;
+      btnDmn.className = mode === "dmnLab" ? activeClass : inactiveClass;
+
+      if (mode === "dmnLab") {
+        viewComparator.classList.add("hidden");
+        viewDmnLab.classList.remove("hidden");
+      } else {
+        viewComparator.classList.remove("hidden");
+        viewDmnLab.classList.add("hidden");
+        if (mode === "museFull") {
+          colVanilla.classList.add("hidden");
+          colMuse.className = "lg:col-span-12 rounded-2xl border border-cyan-500/40 bg-slate-950 shadow-2xl shadow-cyan-950/30 overflow-hidden flex flex-col";
+        } else {
+          colVanilla.classList.remove("hidden");
+          colMuse.className = "lg:col-span-7 rounded-2xl border border-cyan-500/40 bg-slate-950 shadow-2xl shadow-cyan-950/30 overflow-hidden flex flex-col";
+        }
+      }
+    }
+
+    // Wire up all Event Listeners
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("tabBtnSplit").addEventListener("click", () => setTab("split"));
+      document.getElementById("tabBtnMuseFull").addEventListener("click", () => setTab("museFull"));
+      document.getElementById("tabBtnDmnLab").addEventListener("click", () => setTab("dmnLab"));
+
+      document.getElementById("selectScenario").addEventListener("change", (e) => {
+        currentScenarioKey = e.target.value;
+        activeNodeIndex = 0;
+        renderAll();
+        showToast(`Switched brief to: ${e.target.options[e.target.selectedIndex].text}`);
+      });
+
+      document.getElementById("selectArchetype").addEventListener("change", (e) => {
+        currentArchetypeKey = e.target.value;
+        activeNodeIndex = 0;
+        renderAll();
+        showToast(`Collided brief with archetype: ${e.target.options[e.target.selectedIndex].text}`);
+      });
+
+      // 5-Second Gaussian Squint Audit Toggle
+      document.getElementById("btnSquintTest").addEventListener("click", () => {
+        squintBlurEnabled = !squintBlurEnabled;
+        const vCanvas = document.getElementById("vanillaCanvasTarget");
+        const mCanvas = document.getElementById("museCanvasTarget");
+        const label = document.getElementById("squintLabel");
+
+        if (squintBlurEnabled) {
+          vCanvas.classList.remove("squint-blur-off");
+          vCanvas.classList.add("squint-blur-active");
+          mCanvas.classList.remove("squint-blur-off");
+          mCanvas.classList.add("squint-blur-active");
+          label.textContent = "5s Blur Audit: ON (12px)";
+          showToast("Squint Audit ON: Notice how the MuseEngine Pedal-Point Spine & CTA remain unmistakable!");
+        } else {
+          vCanvas.classList.remove("squint-blur-active");
+          vCanvas.classList.add("squint-blur-off");
+          mCanvas.classList.remove("squint-blur-active");
+          mCanvas.classList.add("squint-blur-off");
+          label.textContent = "5s Blur Audit: OFF";
+        }
+      });
+
+      // Trigger DMN Daydream Incubation Spark
+      document.getElementById("btnDaydreamSpark").addEventListener("click", () => {
+        const pick = SPARK_POOL[sparkCount % SPARK_POOL.length];
+        sparkCount += 1;
+        document.getElementById("activeDmnParadoxText").textContent = `"${pick.paradox}"`;
+        document.getElementById("activeFreeEnergy").textContent = pick.feDrop;
+        document.getElementById("metricSparksCount").textContent = String(sparkCount);
+
+        // Cycle archetype to demonstrate non-linear jump
+        const keys = ["coral", "fugue", "physarum", "estuarine"];
+        const nextIdx = (keys.indexOf(currentArchetypeKey) + 1) % keys.length;
+        currentArchetypeKey = keys[nextIdx];
+        document.getElementById("selectArchetype").value = currentArchetypeKey;
+        renderAll();
+        showToast(`DMN Eureka Spark #${sparkCount}: Shifted archetype to ${currentArchetypeKey.toUpperCase()} (${pick.feDrop})`);
+      });
+
+      // Reset Physarum Flux
+      document.getElementById("btnResetFlux").addEventListener("click", () => {
+        const arch = SCENARIOS[currentScenarioKey].archetypes[currentArchetypeKey];
+        arch.nodes.forEach((n, idx) => {
+          n.fluxWeight = idx === 0 ? 1.8 : idx === 1 ? 1.3 : 1.0;
+        });
+        activeNodeIndex = 0;
+        renderAll();
+        showToast("Reset Physarum conduit weights to baseline equilibrium.");
+      });
+
+      // Primary Muse CTA Action
+      document.getElementById("btnMusePrimaryAction").addEventListener("click", () => {
+        artifactsMinted += 1;
+        document.getElementById("ctaCalcifiedCount").textContent = `Artifacts Minted: ${artifactsMinted.toLocaleString()}`;
+        const arch = SCENARIOS[currentScenarioKey].archetypes[currentArchetypeKey];
+        arch.nodes[activeNodeIndex].fluxWeight = Math.min(3.5, +(arch.nodes[activeNodeIndex].fluxWeight + 0.3).toFixed(2));
+        renderAll();
+        showToast(`Minted verifiable artifact #${artifactsMinted.toLocaleString()} (Zero-signup reef loop)!`);
+      });
+
+      // Vanilla dummy CTA buttons feedback
+      document.querySelectorAll(".vanilla-cta-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          showToast("Vanilla CTA clicked: 3 competing equal-weight buttons split attention (Hick's Law penalty).");
+        });
+      });
+
+      // Inject Custom Anomaly into DMN
+      document.getElementById("btnAddCustomTrace").addEventListener("click", () => {
+        const newTrace = {
+          id: `trace_custom_${DMN_EPISODIC_TRACES.length + 1}`,
+          domain: "Marketer ↔ Web Designer Live Feedback",
+          tension: 0.96,
+          text: `Session Anomaly #${DMN_EPISODIC_TRACES.length + 1}: Users ignore static pricing tables; embedding interactive unit-economics sliders inside the hero lifts conversion velocity 2.1x.`
+        };
+        DMN_EPISODIC_TRACES.unshift(newTrace);
+        sparkCount += 1;
+        renderAll();
+        showToast("Injected new high-Zeigarnik anomaly (Z=0.96) into shared DMN memory!");
+      });
+
+      // Copy Prompt Scaffold
+      document.getElementById("btnCopyScaffold").addEventListener("click", () => {
+        const code = document.getElementById("scaffoldCodeBlock").textContent;
+        const ta = document.createElement("textarea");
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast("Copied <MUSE_SHARED_STUDIO_SCAFFOLD> prompt to clipboard!");
+        } catch (err) {
+          showToast("Scaffold ready to copy from block.");
+        }
+        document.body.removeChild(ta);
+      });
+
+      renderAll();
+    });
+  </script>
+</body>
+</html>
