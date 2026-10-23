@@ -25,7 +25,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Optional, Sequence
 
 from .archetypes import Archetype, index_by_id, load_default_archetypes
-from .llm import LLM, CountingLLM, clamp01, complete_json
+from .llm import LLM, CountingLLM, as_list, clamp01, complete_json, str_list
 from .memory import Episode, MemoryStore
 
 SURVIVES = "survives"
@@ -287,13 +287,13 @@ class MuseEngine:
         tensions = [
             {"axis": str(t.get("axis", "")), "description": str(t.get("description", "")),
              "weight": clamp01(t.get("weight"), 0.5)}
-            for t in data.get("tensions", []) if isinstance(t, dict)
+            for t in as_list(data.get("tensions")) if isinstance(t, dict)
         ]
         return ProblemStructure(
             domain=str(data.get("domain", "unknown")),
             tensions=tensions,
-            constraints=[str(c) for c in data.get("constraints", [])],
-            failure_modes=[str(f) for f in data.get("failure_modes", [])],
+            constraints=str_list(data.get("constraints")),
+            failure_modes=str_list(data.get("failure_modes")),
         )
 
     def _map(
@@ -316,7 +316,7 @@ class MuseEngine:
         )
         out: List[Analogy] = []
         seen = set()
-        for item in data.get("analogies", []):
+        for item in as_list(data.get("analogies")):
             if not isinstance(item, dict):
                 continue
             arch = self.by_id.get(str(item.get("archetype_id", "")))
@@ -356,8 +356,8 @@ class MuseEngine:
             id=f"c{idx + 1}_{analogy.archetype_id}",
             title=str(data.get("title", analogy.archetype_name)),
             thesis=str(data.get("thesis", "")),
-            mechanism=[str(m) for m in data.get("mechanism", [])],
-            tests=[str(t) for t in data.get("tests", [])],
+            mechanism=str_list(data.get("mechanism")),
+            tests=str_list(data.get("tests")),
             source_archetype=analogy.archetype_id,
         )
 
@@ -374,7 +374,7 @@ class MuseEngine:
         )
         cand.novelty = clamp01(data.get("novelty"))
         cand.rigor = clamp01(data.get("rigor"))
-        cand.fatal_flaws = [str(f) for f in data.get("fatal_flaws", [])]
+        cand.fatal_flaws = str_list(data.get("fatal_flaws"))
         cand.critique = str(data.get("reasoning", ""))
         verdict = str(data.get("verdict", "")).strip().lower()
         # Anything other than an explicit "survives" counts as refuted, and a

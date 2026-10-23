@@ -147,3 +147,22 @@ def test_run_ab_eval_uses_scaffold():
     assert (result.wins, result.losses, result.ties) == (2, 0, 0)
     assert len(solver_prompts) == 4
     assert "scaffold won 2" in result.summary()
+
+
+def test_failed_explore_keeps_goal():
+    def boom(prompt):
+        raise RuntimeError("model down")
+
+    agent, memory = make_agent(boom)
+    agent.add_goal("keep me")
+    with pytest.raises(RuntimeError):
+        agent.run()
+    assert agent.goals() == ["keep me"]
+    assert memory.audit_log()[-1]["decision"] == "failed"
+
+
+def test_run_ab_eval_rejects_blank_problems_before_calling_models():
+    calls = []
+    with pytest.raises(ValueError):
+        run_ab_eval(["ok", "  "], lambda p: calls.append(p) or "", lambda p: "{}", MuseEngine())
+    assert calls == []

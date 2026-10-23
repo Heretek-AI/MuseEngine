@@ -58,7 +58,11 @@ def _latest_user_text(messages: Messages) -> str:
 
 
 def _inject_system(messages: Messages, scaffold: str) -> Messages:
-    if messages and messages[0].get("role") == "system" and isinstance(messages[0].get("content"), str):
-        first = dict(messages[0], content=f"{messages[0]['content']}\n\n{scaffold}")
-        return [first, *messages[1:]]
+    if messages and messages[0].get("role") == "system":
+        content = messages[0].get("content")
+        if isinstance(content, str):
+            return [dict(messages[0], content=f"{content}\n\n{scaffold}"), *messages[1:]]
+        if isinstance(content, list):
+            blocks = [*content, {"type": "text", "text": scaffold}]
+            return [dict(messages[0], content=blocks), *messages[1:]]
     return [{"role": "system", "content": scaffold}, *messages]

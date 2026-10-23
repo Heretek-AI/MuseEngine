@@ -25,7 +25,7 @@ from typing import Any, Dict, List, Optional
 
 from .engine import MuseEngine
 from .governance import GovernanceError, Governor, ProposedAction
-from .llm import complete_json
+from .llm import complete_json, str_list
 from .memory import MemoryStore
 
 _REFLECT = """TASK: REFLECT
@@ -145,8 +145,10 @@ class MuseAgent:
     # -- actions --------------------------------------------------------------
 
     def _do_explore(self, action: ProposedAction) -> Dict[str, Any]:
-        problem = self._pop_goal()
+        problem = action.payload["problem"]
         report = self.engine.imagine(problem)
+        # Only dequeue once the work succeeded, so a failed call keeps the goal.
+        self._pop_goal()
         return {
             "problem": problem,
             "mode": report.mode,
@@ -165,7 +167,7 @@ class MuseAgent:
             self.engine.llm,
             _REFLECT.format(episodes="\n".join(f"- {e.problem} -> {e.summary}" for e in recent)),
         )
-        lessons = [str(x) for x in data.get("lessons", []) if str(x).strip()]
+        lessons = str_list(data.get("lessons"))
         for lesson in lessons:
             self.memory.add_note(lesson, [e.id for e in recent])
         self.memory.set_state("reflected_count", len(episodes))

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 LLM = Callable[[str], str]
 
@@ -73,6 +73,16 @@ def complete_json(llm: LLM, prompt: str, retries: int = 1) -> Dict[str, Any]:
                 + f"\n\nYour previous reply could not be parsed ({exc}). Reply again with valid JSON only."
             )
     raise LLMError(f"model did not return valid JSON: {last_error}")
+
+
+def as_list(value: Any) -> List[Any]:
+    """A model-supplied field as a list; anything that is not a list becomes []."""
+    return value if isinstance(value, list) else []
+
+
+def str_list(value: Any) -> List[str]:
+    """A model-supplied field as a list of non-empty strings."""
+    return [str(v) for v in as_list(value) if str(v).strip()]
 
 
 def clamp01(value: Any, default: float = 0.0) -> float:

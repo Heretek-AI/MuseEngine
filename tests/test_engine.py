@@ -145,3 +145,26 @@ def test_anthropic_adapter_with_stub_client():
     assert anthropic_llm(client=client)("hello") == "hi"
     assert calls[0]["model"] == "claude-opus-5-5"
     assert calls[0]["messages"] == [{"role": "user", "content": "hello"}]
+
+
+def test_malformed_list_fields_are_ignored(fake_llm):
+    fake_llm.responses["ANALYZE"] = {"domain": "x", "tensions": None, "constraints": "one string"}
+    fake_llm.responses["GENERATE"] = dict(fake_llm.responses["GENERATE"], tests="not a list")
+    fake_llm.responses["CRITIQUE"] = {"novelty": 1, "rigor": 1, "verdict": "survives", "fatal_flaws": None}
+    report = MuseEngine(llm=fake_llm).imagine("Design a backpressure mesh")
+    assert report.structure.tensions == [] and report.structure.constraints == []
+    assert all(c.tests == [] and c.verdict == "refuted" for c in report.candidates)
+
+
+def test_middleware_merges_block_system_message():
+    seen = {}
+
+    @MuseMiddleware(MuseEngine())
+    def agent(messages):
+        seen["messages"] = messages
+
+    agent([{"role": "system", "content": [{"type": "text", "text": "be brief"}]},
+           {"role": "user", "content": "slime mold routing"}])
+    assert len(seen["messages"]) == 2
+    blocks = seen["messages"][0]["content"]
+    assert blocks[0]["text"] == "be brief" and "<muse_scaffold>" in blocks[1]["text"]

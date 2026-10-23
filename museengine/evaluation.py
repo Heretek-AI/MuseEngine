@@ -116,12 +116,19 @@ def run_ab_eval(
     seed: int = 0,
     on_pair: Optional[Callable[[PairResult], None]] = None,
 ) -> EvalResult:
+    problems = [p.strip() for p in problems]
+    if not problems or not all(problems):
+        raise ValueError("problems must be a non-empty list of non-empty strings")
     rng = random.Random(seed)
     pairs = []
     for problem in problems:
-        baseline = solver(problem)
         report = engine.imagine(problem)
-        treated = solver(f"{report.scaffold()}\n\n{problem}")
+        prompts = {"baseline": problem, "treated": f"{report.scaffold()}\n\n{problem}"}
+        # Randomize call order in case the solver carries state between calls.
+        order = ["baseline", "treated"]
+        rng.shuffle(order)
+        answers = {label: solver(prompts[label]) for label in order}
+        baseline, treated = answers["baseline"], answers["treated"]
         pair = judge_pair(judge, problem, baseline, treated, rng)
         pairs.append(pair)
         if on_pair:
