@@ -1,0 +1,7 @@
+# One problem per line. Used by: python -m museengine eval examples/problems.txt
+Design a state synchronization layer for a globally distributed app that survives 100x hot-key traffic spikes without retry storms.
+Propose falsifiable mechanisms for why glymphatic clearance declines nonlinearly with age.
+Design a marketplace launch strategy that solves the cold-start problem for a two-sided B2B platform.
+Design a rate limiter for a multi-tenant API where tenants have wildly different burst patterns.
+Propose testable hypotheses for why some coral reefs recover from bleaching much faster than others.
+Design an on-call alerting scheme that cuts alert fatigue without missing real incidents.
