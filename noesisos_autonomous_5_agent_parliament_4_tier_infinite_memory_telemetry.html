@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoesisOS — Autonomous 5-Agent Parliament &amp; 4-Tier Infinite Memory Telemetry</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #05070b;
+      --bg-card: #0c1018;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-void);
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .bar-transition {
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.25); }
+      50% { box-shadow: 0 0 22px 4px rgba(34, 211, 238, 0.35); }
+    }
+    .spotlight-glow {
+      animation: pulseGlow 2.8s infinite;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #05070b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- TOP KERNEL TELEMETRY HEADER -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- OS Identity -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 via-emerald-400 to-indigo-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <span class="font-display font-bold text-slate-950 text-lg">N</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-display font-bold text-base sm:text-lg tracking-tight text-white">NoesisOS Autonomous Kernel</h1>
+            <span id="daemonStatusBadge" class="text-[11px] font-mono-code uppercase px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              Self-Determining
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">5-Agent Global Workspace Parliament • Asynchronous Sub-Cortical Daemons • 4-Tier Metabolic Memory</p>
+        </div>
+      </div>
+
+      <!-- Kernel Execution Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btnStepTick" type="button" class="px-3 py-1.5 rounded-lg text-xs font-mono-code font-semibold bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-sm transition-all">
+          Step +1 Tick
+        </button>
+        <button id="btnAutoLoop" type="button" class="px-3 py-1.5 rounded-lg text-xs font-mono-code border border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 transition-all">
+          <span id="autoLoopLabel">&#9654; Auto-Run Daemon</span>
+        </button>
+        <button id="btnInjectAnomaly" type="button" class="px-3 py-1.5 rounded-lg text-xs font-mono-code border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition-all">
+          &#9889; Inject Epistemic Shock
+        </button>
+        <button id="btnForceSleep" type="button" class="px-3 py-1.5 rounded-lg text-xs font-mono-code border border-indigo-500/40 bg-indigo-500/15 text-indigo-300 hover:bg-indigo-500/25 transition-all">
+          &#9790; Force REM Sleep
+        </button>
+        <button id="btnResetKernel" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-mono-code border border-slate-700 bg-slate-900 text-slate-400 hover:text-white transition-all">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- SECOND BAR: GLOBAL KPI COUNTERS -->
+    <div class="border-t border-slate-800/70 bg-slate-900/60">
+      <div class="max-w-7xl mx-auto px-4 py-2 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs font-mono-code">
+        <div class="px-2.5 py-1 rounded bg-slate-950/90 border border-slate-800 flex items-center justify-between">
+          <span class="text-slate-400">OS Tick:</span>
+          <span id="kpiTick" class="text-white font-semibold">01</span>
+        </div>
+        <div class="px-2.5 py-1 rounded bg-slate-950/90 border border-slate-800 flex items-center justify-between">
+          <span class="text-slate-400">Free Energy (F):</span>
+          <span id="kpiFreeEnergy" class="text-amber-400 font-semibold">0.483 J</span>
+        </div>
+        <div class="px-2.5 py-1 rounded bg-slate-950/90 border border-slate-800 flex items-center justify-between">
+          <span class="text-slate-400">Temperament:</span>
+          <span id="kpiTemperament" class="text-cyan-300 font-semibold truncate ml-1">Visionary Explorer</span>
+        </div>
+        <div class="px-2.5 py-1 rounded bg-slate-950/90 border border-slate-800 flex items-center justify-between">
+          <span class="text-slate-400">Semantic Laws:</span>
+          <span id="kpiSchemas" class="text-emerald-400 font-semibold">0</span>
+        </div>
+        <div class="px-2.5 py-1 rounded bg-slate-950/90 border border-slate-800 flex items-center justify-between">
+          <span class="text-slate-400">Muscle Skills:</span>
+          <span id="kpiSkills" class="text-indigo-400 font-semibold">0</span>
+        </div>
+        <div class="px-2.5 py-1 rounded bg-slate-950/90 border border-slate-800 flex items-center justify-between">
+          <span class="text-slate-400">Tokens Evicted:</span>
+          <span id="kpiTokensSaved" class="text-rose-300 font-semibold">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB-CORTICAL PARALLEL DAEMON INTERRUPT RIBBON -->
+  <div class="bg-gradient-to-r from-slate-950 via-cyan-950/35 to-slate-950 border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs font-mono-code">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <span class="text-cyan-300 uppercase text-[11px]">3 Parallel Sub-Cortical Daemons Running:</span>
+        <span id="subcorticalStatusText" class="text-slate-200">
+          [DMN Levy-Flight Walker: ACTIVE] • [Ebbinghaus Synaptic Pruner: ACTIVE] • [Anomaly Forager: ACTIVE]
+        </span>
+      </div>
+      <span id="lastInterruptBadge" class="text-[11px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+        Last Eureka Interrupt: Waiting for threshold (&Delta;F &ge; 0.68J)
+      </span>
+    </div>
+  </div>
+
+  <!-- MAIN OS WORKSPACE GRID -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-5 space-y-6">
+
+    <!-- TOP ROW: 5-AGENT PARLIAMENT AUCTION + GLOBAL WORKSPACE SPOTLIGHT + HOMEOSTASIS -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+
+      <!-- COL 1 (4 Cols): HOMEOSTATIC INTEROCEPTION & PLASTIC PERSONALITY -->
+      <div class="lg:col-span-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 flex flex-col justify-between space-y-4">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div>
+              <h2 class="font-display font-bold text-sm text-white">1. Autonomic Homeostat (Vital Signs)</h2>
+              <p class="text-[11px] text-slate-400">Internal drives generating autonomous goals</p>
+            </div>
+            <span class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-slate-800 text-slate-300">Interoception</span>
+          </div>
+
+          <!-- 5 Homeostatic Drive Bars -->
+          <div id="homeostasisBars" class="space-y-2.5 text-xs">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Plastic Personality Vector -->
+        <div class="pt-3 border-t border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-display font-bold text-sm text-white">Emergent Personality Vector</h3>
+              <p class="text-[11px] text-slate-400">Plastic weights reinforced by successful bids</p>
+            </div>
+            <span id="temperamentBadge" class="text-[10px] font-mono-code px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+              Visionary Explorer
+            </span>
+          </div>
+          <div id="personalityBars" class="space-y-2 text-xs">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 2 (8 Cols): 5-AGENT PARLIAMENT AUCTION & GLOBAL WORKSPACE BROADCAST SPOTLIGHT -->
+      <div class="lg:col-span-8 rounded-2xl border border-cyan-500/35 bg-slate-950 p-4 flex flex-col justify-between space-y-4 spotlight-glow">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
+          <div>
+            <h2 class="font-display font-bold text-base text-white">2. Society-of-Mind Parliament &amp; Global Workspace Spotlight</h2>
+            <p class="text-xs text-slate-400">5 orthogonal drive-agents bid each tick; the highest Bid Power captures conscious compute</p>
+          </div>
+          <span id="winningAgentPill" class="text-xs font-mono-code px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold">
+            Spotlight Winner: 2_dopaminergic_explorer
+          </span>
+        </div>
+
+        <!-- Competing Agent Bid Cards -->
+        <div id="parliamentBidGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Active Global Workspace Broadcast Box -->
+        <div class="p-4 rounded-xl bg-gradient-to-r from-slate-900 via-cyan-950/30 to-slate-900 border border-cyan-500/40 space-y-2">
+          <div class="flex items-center justify-between text-[11px] font-mono-code">
+            <span class="text-cyan-300 uppercase font-semibold">&#9733; Active Conscious Broadcast (Serial Attention Bottleneck)</span>
+            <span id="broadcastTickLabel" class="text-slate-400">Tick #01</span>
+          </div>
+          <div id="broadcastGoalText" class="font-display font-bold text-sm sm:text-base text-white">
+            Autonomous Inquiry: Formulate non-linear hypothesis/topology for 'Bioelectric ion-channel phase-locking'
+          </div>
+          <div id="broadcastOutcomeText" class="text-xs text-emerald-300 font-mono-code leading-relaxed">
+            Outcome: Synthesized 'Arch-1: Contrary-motion resource scheduling Topology' (ImaginationIndex=0.8556).
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECOND ROW: 4-TIER METABOLIC "INFINITE" MEMORY ARCHITECTURE -->
+    <section class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <h2 class="font-display font-bold text-base text-white">
+            3. Four-Tier Metabolic "Infinite" Memory Hierarchy (With Ebbinghaus Decay &amp; REM Sleep Consolidation)
+          </h2>
+          <p class="text-xs text-slate-400">
+            Raw episodes decay unless held by Zeigarnik tension; REM sleep distills episodes into permanent Semantic Laws &amp; zero-token Procedural Skills
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono-code">
+          <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-cyan-300">
+            Tier 0 Working: <span id="memTier0Count">1/5</span>
+          </span>
+          <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-amber-300">
+            Tier 1 Episodic: <span id="memTier1Count">1</span>
+          </span>
+          <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-emerald-300">
+            Tier 2 Semantic: <span id="memTier2Count">0</span>
+          </span>
+          <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-indigo-300">
+            Tier 3 Procedural: <span id="memTier3Count">0</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+
+        <!-- TIER 0: WORKING MEMORY + TIER 4: AUTOBIOGRAPHICAL SPINE -->
+        <div class="rounded-xl bg-slate-950 border border-slate-800 p-3.5 flex flex-col justify-between space-y-3">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono-code uppercase text-cyan-400 font-semibold">Tier 0: Working Memory</span>
+              <span class="text-[10px] font-mono-code text-slate-500">Max 5 Slots</span>
+            </div>
+            <div id="tier0WorkingList" class="space-y-1.5 text-[11px] font-mono-code text-slate-300 max-h-40 overflow-y-auto">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800/80 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono-code uppercase text-rose-400 font-semibold">Tier 4: Identity Spine</span>
+              <span class="text-[10px] font-mono-code text-slate-500">Core Self</span>
+            </div>
+            <div id="tier4SpineList" class="space-y-1.5 text-[11px] text-slate-300 max-h-36 overflow-y-auto">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TIER 1: HIPPOCAMPAL EPISODIC BUFFER (EBBINGHAUS DECAY + ZEIGARNIK LOCK) -->
+        <div class="rounded-xl bg-slate-950 border border-slate-800 p-3.5 flex flex-col justify-between space-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono-code uppercase text-amber-400 font-semibold">Tier 1: Hippocampal Episodic</span>
+              <span class="text-[10px] font-mono-code text-slate-400">Ebbinghaus S(t)=e^-&lambda;t</span>
+            </div>
+            <div id="tier1EpisodicList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+          <div class="text-[10px] font-mono-code text-slate-500 pt-2 border-t border-slate-900">
+            Unresolved Zeigarnik items decay 4x slower until Architect or REM Sleep resolves them.
+          </div>
+        </div>
+
+        <!-- TIER 2: NEOCORTICAL SEMANTIC SCHEMAS (DISTILLED LAWS) -->
+        <div class="rounded-xl bg-slate-950 border border-slate-800 p-3.5 flex flex-col justify-between space-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono-code uppercase text-emerald-400 font-semibold">Tier 2: Neocortical Semantic</span>
+              <span class="text-[10px] font-mono-code text-slate-400">Distilled in REM Sleep</span>
+            </div>
+            <div id="tier2SemanticList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+          <div class="text-[10px] font-mono-code text-slate-500 pt-2 border-t border-slate-900">
+            Compresses N episodic traces into 1 permanent causal law, evicting raw transcript tokens.
+          </div>
+        </div>
+
+        <!-- TIER 3: CEREBELLAR PROCEDURAL MUSCLE SKILLS -->
+        <div class="rounded-xl bg-slate-950 border border-slate-800 p-3.5 flex flex-col justify-between space-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono-code uppercase text-indigo-400 font-semibold">Tier 3: Procedural Muscle</span>
+              <span class="text-[10px] font-mono-code text-slate-400">0-Token Compiled Tools</span>
+            </div>
+            <div id="tier3ProceduralList" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+          <div class="text-[10px] font-mono-code text-slate-500 pt-2 border-t border-slate-900">
+            Recurring patterns compile into callable code operators so they cost 0 prompt tokens.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- THIRD ROW: AUTONOMOUS TICK AUDIT STREAM & SQLITE WAL SNAPSHOT -->
+    <section class="rounded-2xl border border-slate-800 bg-slate-950 p-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-display font-bold text-sm text-white">Autonomous Global Workspace Audit Log (`noesis_mind.db` WAL Stream)</h2>
+          <p class="text-[11px] text-slate-400">Chronological stream of self-determined goals, sub-cortical interrupts, and sleep consolidations</p>
+        </div>
+        <button id="btnExportSqlJson" type="button" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-mono-code">
+          Copy SQLite State JSON
+        </button>
+      </div>
+      <div id="auditLogTable" class="space-y-1.5 max-h-60 overflow-y-auto font-mono-code text-xs pr-1">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toastNotification" class="fixed bottom-4 right-4 z-50 hidden px-4 py-2.5 rounded-xl bg-slate-900 border border-cyan-400/50 text-xs font-mono-code text-cyan-200 shadow-2xl">
+    <span id="toastText">Tick executed</span>
+  </div>
+
+  <script>
+    // =========================================================================
+    // In-Browser NoesisCognitiveOS Kernel Simulation Engine
+    // =========================================================================
+    const FRONTIERS = [
+      {
+        domain: "software_architecture",
+        problem: "Self-healing consensus mesh that survives 80% packet loss via slime-mold phase waves",
+        hypothesisTitle: "Arch-1: Physarum D^4 Peristaltic Phase-Wave Mesh",
+        indexScore: 0.874
+      },
+      {
+        domain: "scientific_hypothesis",
+        problem: "Bioelectric ion-channel phase-locking as an upstream trigger for tissue regeneration",
+        hypothesisTitle: "H1: Polyphonic Fugue Bioelectric Counterpoint Hypothesis",
+        indexScore: 0.862
+      },
+      {
+        domain: "software_architecture",
+        problem: "Zero-copy browser-to-browser CRDT state reef that eliminates central cloud egress",
+        hypothesisTitle: "Arch-2: Coral-Zooxanthellae Symbiotic Edge State Reef",
+        indexScore: 0.889
+      },
+      {
+        domain: "scientific_hypothesis",
+        problem: "Estuarine Richardson-number shear threshold in blood-brain barrier glymphatic efflux",
+        hypothesisTitle: "H2: Estuarine Salt-Wedge Tidal Ratcheting Clearance Model",
+        indexScore: 0.912
+      },
+      {
+        domain: "software_architecture",
+        problem: "Spin-glass defect routing for lockless distributed database transactions",
+        hypothesisTitle: "Arch-3: Mobile Topological Defect Annihilation Protocol",
+        indexScore: 0.868
+      }
+    ];
+
+    let kernelState = null;
+    let autoLoopTimer = null;
+
+    function createInitialKernelState() {
+      return {
+        tick: 0,
+        tokensEvicted: 0,
+        lastEureka: null,
+        homeostasis: {
+          epistemic_hunger: 0.78,
+          zeigarnik_tension: 0.65,
+          memory_entropy: 0.25,
+          cognitive_fatigue: 0.15,
+          falsification_debt: 0.40
+        },
+        personality: {
+          curiosity_openness: 0.55,
+          architectural_rigor: 0.50,
+          skeptical_vigilance: 0.48,
+          reflective_depth: 0.50,
+          creative_audacity: 0.52
+        },
+        workingMemory: [],
+        episodicBuffer: [],
+        semanticSchemas: [],
+        proceduralSkills: [],
+        autobiographicalSpine: [
+          "Genesis Commitment: I am a self-determining cognitive OS that seeks falsifiable truth and structural elegance."
+        ],
+        currentBids: [],
+        lastWinner: null,
+        auditLogs: []
+      };
+    }
+
+    function computeFreeEnergy(h) {
+      return +(
+        0.28 * h.epistemic_hunger +
+        0.26 * h.zeigarnik_tension +
+        0.18 * h.memory_entropy +
+        0.14 * h.cognitive_fatigue +
+        0.14 * h.falsification_debt
+      ).toFixed(3);
+    }
+
+    function getDominantTemperament(p) {
+      const scores = [
+        ["Visionary Explorer", p.curiosity_openness + 0.3 * p.creative_audacity],
+        ["Systems Architect", p.architectural_rigor + 0.15],
+        ["Popperian Empiricist", p.skeptical_vigilance + 0.15],
+        ["Contemplative Synthesizer", p.reflective_depth + 0.15]
+      ];
+      scores.sort((a, b) => b[1] - a[1]);
+      return scores[0][0];
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toastNotification");
+      document.getElementById("toastText").textContent = msg;
+      el.classList.remove("hidden");
+      clearTimeout(window._noesisToastTimer);
+      window._noesisToastTimer = setTimeout(() => el.classList.add("hidden"), 2600);
+    }
+
+    // Apply biological Ebbinghaus decay to Tier 1 Episodic Buffer
+    function runSubcorticalEbbinghausDecay() {
+      const surviving = [];
+      kernelState.episodicBuffer.forEach((ep) => {
+        const dt = Math.max(0, kernelState.tick - ep.tick);
+        const rate = ep.zeigarnikOpen ? 0.04 : 0.18 * (1.2 - ep.salience);
+        ep.strength = +Math.exp(-rate * dt).toFixed(3);
+        if (ep.strength < 0.28 && !ep.zeigarnikOpen) {
+          kernelState.tokensEvicted += 95;
+        } else {
+          surviving.push(ep);
+        }
+      });
+      kernelState.episodicBuffer = surviving;
+      kernelState.homeostasis.memory_entropy = Math.min(1.0, +(kernelState.episodicBuffer.length * 0.17).toFixed(3));
+    }
+
+    // Collect bids from the 5 internal agents
+    function collectBids(eurekaBoost) {
+      const h = kernelState.homeostasis;
+      const p = kernelState.personality;
+      const front = FRONTIERS[kernelState.tick % FRONTIERS.length];
+
+      const explorerUrg = +(h.epistemic_hunger * p.curiosity_openness * (eurekaBoost ? 1.25 : 1.0)).toFixed(3);
+      const archUrg = +(h.zeigarnik_tension * p.architectural_rigor).toFixed(3);
+      const criticUrg = +(h.falsification_debt * p.skeptical_vigilance).toFixed(3);
+      const sleepUrg = +((0.55 * h.memory_entropy + 0.45 * h.cognitive_fatigue) * p.reflective_depth * 1.48).toFixed(3);
+
+      const bids = [
+        {
+          agent: "2_dopaminergic_explorer",
+          label: "Dopaminergic Explorer (Forager)",
+          actionType: "FORAGE_HYPOTHESIS",
+          goal: `Autonomous Inquiry: Bisociate non-linear model for "${front.problem}"`,
+          rationale: `Epistemic hunger=${h.epistemic_hunger.toFixed(2)} ${eurekaBoost ? "(+Sub-Cortical Eureka Boost!)" : ""}`,
+          urgency: explorerUrg,
+          expectedDrop: 0.65,
+          bidPower: +(explorerUrg * 0.65).toFixed(4),
+          color: "cyan"
+        },
+        {
+          agent: "3_prefrontal_architect",
+          label: "Prefrontal Architect (Builder)",
+          actionType: "BUILD_ARCHITECTURE",
+          goal: `Resolve open Zeigarnik anomaly in [${front.domain}] into conservation topology`,
+          rationale: `Unfinished Zeigarnik tension=${h.zeigarnik_tension.toFixed(2)} demanding structural closure`,
+          urgency: archUrg,
+          expectedDrop: 0.62,
+          bidPower: +(archUrg * 0.62).toFixed(4),
+          color: "emerald"
+        },
+        {
+          agent: "4_thymic_adversarial_critic",
+          label: "Thymic Adversarial Critic (Sentinel)",
+          actionType: "FALSIFY_CLAIM",
+          goal: `Execute Popperian refutation & Jepsen chaos stress-test on active ${front.domain} model`,
+          rationale: `Falsification debt=${h.falsification_debt.toFixed(2)} guarding against self-delusion`,
+          urgency: criticUrg,
+          expectedDrop: 0.58,
+          bidPower: +(criticUrg * 0.58).toFixed(4),
+          color: "amber"
+        },
+        {
+          agent: "1_autonomic_homeostat",
+          label: "Autonomic Homeostat + Ego (REM Sleep)",
+          actionType: "REM_CONSOLIDATE",
+          goal: `Enter REM/Slow-Wave Sleep: distill Tier-1 episodes into Tier-2 Semantic Laws & Tier-3 Muscle Skills`,
+          rationale: `Memory entropy=${h.memory_entropy.toFixed(2)}, cognitive fatigue=${h.cognitive_fatigue.toFixed(2)}`,
+          urgency: sleepUrg,
+          expectedDrop: 0.76,
+          bidPower: +(sleepUrg * 0.76).toFixed(4),
+          color: "indigo"
+        }
+      ];
+
+      bids.sort((a, b) => b.bidPower - a.bidPower);
+      return bids;
+    }
+
+    function executeTick(forcedActionType = null) {
+      kernelState.tick += 1;
+      const t = kernelState.tick;
+      const h = kernelState.homeostasis;
+      const p = kernelState.personality;
+      const front = FRONTIERS[t % FRONTIERS.length];
+
+      // 1. Sub-cortical parallel daemons
+      runSubcorticalEbbinghausDecay();
+      const eurekaTriggered = !forcedActionType && (t % 3 === 0);
+      if (eurekaTriggered) {
+        const dF = (0.68 + (t % 4) * 0.03).toFixed(3);
+        kernelState.lastEureka = `Tick #${t}: Spontaneous DMN bridge between [${front.domain}] & [Statistical Physics] (ΔF = -${dF}J)`;
+      }
+
+      // 2. Collect Parliament Bids
+      const bids = collectBids(eurekaTriggered);
+      kernelState.currentBids = bids;
+
+      let winner = bids[0];
+      if (forcedActionType) {
+        const found = bids.find((b) => b.actionType === forcedActionType);
+        if (found) winner = found;
+      }
+      kernelState.lastWinner = winner;
+
+      // 3. Execute Winning Bid
+      let outcome = "";
+      if (winner.actionType === "FORAGE_HYPOTHESIS") {
+        outcome = `Synthesized "${front.hypothesisTitle}" (ImaginationIndex=${front.indexScore}). Encoded in Hippocampal Tier-1 with Zeigarnik lock.`;
+        kernelState.episodicBuffer.unshift({
+          id: `ep_${t}`,
+          tick: t,
+          summary: `${front.hypothesisTitle} (${front.domain})`,
+          domain: front.domain,
+          salience: 0.88,
+          zeigarnikOpen: true,
+          strength: 1.0,
+          consolidated: false
+        });
+        kernelState.workingMemory.push(`[T${t}:EXPLORER] ${front.hypothesisTitle}`);
+        h.epistemic_hunger = Math.max(0.18, +(h.epistemic_hunger - 0.28).toFixed(3));
+        h.zeigarnik_tension = Math.min(0.96, +(h.zeigarnik_tension + 0.19).toFixed(3));
+        h.falsification_debt = Math.min(0.96, +(h.falsification_debt + 0.22).toFixed(3));
+        h.cognitive_fatigue = Math.min(0.96, +(h.cognitive_fatigue + 0.14).toFixed(3));
+        p.curiosity_openness = Math.min(0.95, +(p.curiosity_openness + 0.025).toFixed(3));
+        p.creative_audacity = Math.min(0.95, +(p.creative_audacity + 0.02).toFixed(3));
+
+      } else if (winner.actionType === "BUILD_ARCHITECTURE") {
+        outcome = `Constructed formal conservation law blueprint for [${front.domain}] and resolved open Zeigarnik tension.`;
+        // Mark oldest open episode resolved
+        const openEp = kernelState.episodicBuffer.find((e) => e.zeigarnikOpen);
+        if (openEp) openEp.zeigarnikOpen = false;
+        kernelState.episodicBuffer.unshift({
+          id: `ep_${t}`,
+          tick: t,
+          summary: `Compiled formal topology & Little's/Monro-Kellie invariants for ${front.domain}`,
+          domain: front.domain,
+          salience: 0.83,
+          zeigarnikOpen: false,
+          strength: 1.0,
+          consolidated: false
+        });
+        kernelState.workingMemory.push(`[T${t}:ARCHITECT] Resolved Zeigarnik topology (${front.domain})`);
+        h.zeigarnik_tension = Math.max(0.15, +(h.zeigarnik_tension - 0.32).toFixed(3));
+        h.falsification_debt = Math.min(0.96, +(h.falsification_debt + 0.16).toFixed(3));
+        h.epistemic_hunger = Math.min(0.96, +(h.epistemic_hunger + 0.16).toFixed(3));
+        h.cognitive_fatigue = Math.min(0.96, +(h.cognitive_fatigue + 0.15).toFixed(3));
+        p.architectural_rigor = Math.min(0.95, +(p.architectural_rigor + 0.03).toFixed(3));
+
+      } else if (winner.actionType === "FALSIFY_CLAIM") {
+        outcome = `Executed Popperian phase-perturbation & chaos test on [${front.domain}]; pruned 1 brittle assumption.`;
+        kernelState.episodicBuffer.unshift({
+          id: `ep_${t}`,
+          tick: t,
+          summary: `Popperian refutation gate passed on ${front.hypothesisTitle}`,
+          domain: front.domain,
+          salience: 0.90,
+          zeigarnikOpen: false,
+          strength: 1.0,
+          consolidated: false
+        });
+        kernelState.workingMemory.push(`[T${t}:CRITIC] Falsification audit passed (${front.domain})`);
+        h.falsification_debt = Math.max(0.10, +(h.falsification_debt - 0.35).toFixed(3));
+        h.epistemic_hunger = Math.min(0.96, +(h.epistemic_hunger + 0.20).toFixed(3));
+        h.cognitive_fatigue = Math.min(0.96, +(h.cognitive_fatigue + 0.12).toFixed(3));
+        p.skeptical_vigilance = Math.min(0.95, +(p.skeptical_vigilance + 0.03).toFixed(3));
+
+      } else if (winner.actionType === "REM_CONSOLIDATE") {
+        const count = kernelState.episodicBuffer.length;
+        const schemaId = `LAW-${kernelState.semanticSchemas.length + 1}`;
+        kernelState.semanticSchemas.unshift({
+          id: schemaId,
+          principle: `Distilled Law (${front.domain}): Replace central locks/pumps with phase-lagged ratchets & D^4 flux scaling (compressed from ${Math.max(1, count)} episodes).`,
+          confidence: Math.min(0.99, +(0.78 + 0.05 * count).toFixed(2))
+        });
+
+        const skillName = `auto_skill_${front.domain}_ratchet_${kernelState.proceduralSkills.length + 1}`;
+        kernelState.proceduralSkills.unshift({
+          name: skillName,
+          trigger: `When ${front.domain} exhibits contention or clearance stall`,
+          op: `apply_contrary_motion_and_d4_flux_scaling()`
+        });
+
+        // Evict consolidated episodic traces
+        const pruned = kernelState.episodicBuffer.length;
+        kernelState.tokensEvicted += pruned * 140;
+        kernelState.episodicBuffer = [];
+        kernelState.workingMemory.push(`[T${t}:REM_SLEEP] Distilled ${schemaId} & compiled ${skillName}`);
+        kernelState.autobiographicalSpine.push(
+          `Tick #${t} REM Consolidation: Distilled ${schemaId}, compiled ${skillName}, evicted ${pruned * 140} raw tokens.`
+        );
+
+        outcome = `REM Sleep Consolidation complete: +1 Neocortical Semantic Law (${schemaId}), +1 Zero-Token Procedural Skill, pruned ${pruned} raw episodes.`;
+        h.cognitive_fatigue = 0.10;
+        h.memory_entropy = 0.08;
+        h.zeigarnik_tension = Math.max(0.18, +(h.zeigarnik_tension - 0.22).toFixed(3));
+        h.epistemic_hunger = Math.min(0.95, +(h.epistemic_hunger + 0.25).toFixed(3));
+        p.reflective_depth = Math.min(0.95, +(p.reflective_depth + 0.03).toFixed(3));
+      }
+
+      if (kernelState.workingMemory.length > 5) {
+        kernelState.workingMemory.shift();
+      }
+      h.memory_entropy = Math.min(1.0, +(kernelState.episodicBuffer.length * 0.18).toFixed(3));
+
+      const fe = computeFreeEnergy(h);
+      const temp = getDominantTemperament(p);
+
+      kernelState.auditLogs.unshift({
+        tick: t,
+        winner: winner.agent,
+        bidPower: winner.bidPower,
+        goal: winner.goal,
+        outcome: outcome,
+        freeEnergy: fe,
+        eureka: eurekaTriggered ? kernelState.lastEureka : null
+      });
+
+      renderDashboard();
+    }
+
+    function renderDashboard() {
+      const h = kernelState.homeostasis;
+      const p = kernelState.personality;
+      const fe = computeFreeEnergy(h);
+      const temp = getDominantTemperament(p);
+
+      // KPIs
+      document.getElementById("kpiTick").textContent = String(kernelState.tick).padStart(2, "0");
+      document.getElementById("kpiFreeEnergy").textContent = `${fe.toFixed(3)} J`;
+      document.getElementById("kpiTemperament").textContent = temp;
+      document.getElementById("temperamentBadge").textContent = temp;
+      document.getElementById("kpiSchemas").textContent = String(kernelState.semanticSchemas.length);
+      document.getElementById("kpiSkills").textContent = String(kernelState.proceduralSkills.length);
+      document.getElementById("kpiTokensSaved").textContent = kernelState.tokensEvicted.toLocaleString();
+
+      if (kernelState.lastEureka) {
+        document.getElementById("lastInterruptBadge").textContent = `⚡ ${kernelState.lastEureka}`;
+      }
+
+      // 1. Homeostasis Bars
+      const hContainer = document.getElementById("homeostasisBars");
+      hContainer.innerHTML = "";
+      const hItems = [
+        ["Epistemic Hunger (Curiosity)", h.epistemic_hunger, "bg-cyan-400"],
+        ["Zeigarnik Tension (Unfinished)", h.zeigarnik_tension, "bg-emerald-400"],
+        ["Falsification Debt (Unverified)", h.falsification_debt, "bg-amber-400"],
+        ["Memory Entropy (Episodic Clutter)", h.memory_entropy, "bg-indigo-400"],
+        ["Cognitive Fatigue (Need REM)", h.cognitive_fatigue, "bg-rose-400"]
+      ];
+      hItems.forEach(([label, val, colorCls]) => {
+        const pct = Math.round(val * 100);
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <div class="flex justify-between text-[11px] mb-1">
+            <span class="text-slate-300">${label}</span>
+            <span class="font-mono-code text-slate-200">${val.toFixed(2)}</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
+            <div class="h-full ${colorCls} bar-transition" style="width: ${pct}%"></div>
+          </div>
+        `;
+        hContainer.appendChild(div);
+      });
+
+      // 2. Personality Bars
+      const pContainer = document.getElementById("personalityBars");
+      pContainer.innerHTML = "";
+      const pItems = [
+        ["Curiosity Openness", p.curiosity_openness],
+        ["Creative Audacity", p.creative_audacity],
+        ["Architectural Rigor", p.architectural_rigor],
+        ["Skeptical Vigilance", p.skeptical_vigilance],
+        ["Reflective Depth", p.reflective_depth]
+      ];
+      pItems.forEach(([label, val]) => {
+        const pct = Math.round(val * 100);
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <div class="flex justify-between text-[11px] mb-0.5">
+            <span class="text-slate-400">${label}</span>
+            <span class="font-mono-code text-cyan-300">${val.toFixed(3)}</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-slate-950 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 bar-transition" style="width: ${pct}%"></div>
+          </div>
+        `;
+        pContainer.appendChild(div);
+      });
+
+      // 3. Parliament Bids
+      const bidGrid = document.getElementById("parliamentBidGrid");
+      bidGrid.innerHTML = "";
+      kernelState.currentBids.forEach((b, idx) => {
+        const isWinner = kernelState.lastWinner && b.agent === kernelState.lastWinner.agent;
+        const card = document.createElement("div");
+        card.className = `p-3 rounded-xl border transition-all ${
+          isWinner
+            ? "bg-slate-900/95 border-cyan-400 shadow-lg shadow-cyan-500/10"
+            : "bg-slate-900/40 border-slate-800/80 opacity-80"
+        }`;
+        const pct = Math.min(100, Math.round((b.bidPower / 0.55) * 100));
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-semibold text-xs ${isWinner ? "text-white" : "text-slate-300"}">
+              ${isWinner ? "&#9733; " : ""}${b.label}
+            </span>
+            <span class="text-[11px] font-mono-code px-2 py-0.5 rounded ${
+              isWinner ? "bg-cyan-500/20 text-cyan-300 font-bold" : "bg-slate-800 text-slate-400"
+            }">Bid: ${b.bidPower.toFixed(4)}</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1 truncate">${b.rationale}</p>
+          <div class="w-full h-1.5 rounded-full bg-slate-950 mt-2 overflow-hidden">
+            <div class="h-full ${isWinner ? "bg-cyan-400" : "bg-slate-600"} bar-transition" style="width: ${pct}%"></div>
+          </div>
+        `;
+        bidGrid.appendChild(card);
+      });
+
+      if (kernelState.lastWinner && kernelState.auditLogs.length > 0) {
+        const latest = kernelState.auditLogs[0];
+        document.getElementById("winningAgentPill").textContent = `Spotlight Winner: ${latest.winner}`;
+        document.getElementById("broadcastTickLabel").textContent = `Tick #${String(latest.tick).padStart(2, "0")}`;
+        document.getElementById("broadcastGoalText").textContent = latest.goal;
+        document.getElementById("broadcastOutcomeText").textContent = latest.outcome;
+      }
+
+      // 4. Memory Tiers
+      document.getElementById("memTier0Count").textContent = `${kernelState.workingMemory.length}/5`;
+      document.getElementById("memTier1Count").textContent = String(kernelState.episodicBuffer.length);
+      document.getElementById("memTier2Count").textContent = String(kernelState.semanticSchemas.length);
+      document.getElementById("memTier3Count").textContent = String(kernelState.proceduralSkills.length);
+
+      // Tier 0
+      const t0 = document.getElementById("tier0WorkingList");
+      t0.innerHTML = kernelState.workingMemory
+        .slice()
+        .reverse()
+        .map((m) => `<div class="p-1.5 rounded bg-slate-900 border border-slate-800/80 truncate">${m}</div>`)
+        .join("");
+
+      // Tier 4 Spine
+      const t4 = document.getElementById("tier4SpineList");
+      t4.innerHTML = kernelState.autobiographicalSpine
+        .slice()
+        .reverse()
+        .map((s) => `<div class="p-2 rounded bg-slate-900/90 border-l-2 border-rose-400 text-[11px] leading-snug">${s}</div>`)
+        .join("");
+
+      // Tier 1 Episodic
+      const t1 = document.getElementById("tier1EpisodicList");
+      if (kernelState.episodicBuffer.length === 0) {
+        t1.innerHTML = `<div class="text-xs text-slate-500 italic p-2">Episodic buffer clean (consolidated into Tier 2/3 during REM sleep).</div>`;
+      } else {
+        t1.innerHTML = kernelState.episodicBuffer
+          .map(
+            (ep) => `
+            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+              <div class="flex items-center justify-between text-[10px] font-mono-code">
+                <span class="${ep.zeigarnikOpen ? "text-amber-300" : "text-slate-400"}">
+                  ${ep.zeigarnikOpen ? "&#128274; Zeigarnik Open" : "Resolved"}
+                </span>
+                <span class="text-cyan-300">Strength: ${(ep.strength * 100).toFixed(0)}%</span>
+              </div>
+              <div class="text-xs text-slate-200 leading-snug">${ep.summary}</div>
+              <div class="w-full h-1 rounded bg-slate-950 overflow-hidden">
+                <div class="h-full bg-amber-400" style="width: ${Math.round(ep.strength * 100)}%"></div>
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+
+      // Tier 2 Semantic
+      const t2 = document.getElementById("tier2SemanticList");
+      if (kernelState.semanticSchemas.length === 0) {
+        t2.innerHTML = `<div class="text-xs text-slate-500 italic p-2">No semantic laws distilled yet—step ticks or click "Force REM Sleep".</div>`;
+      } else {
+        t2.innerHTML = kernelState.semanticSchemas
+          .map(
+            (sc) => `
+            <div class="p-2.5 rounded-lg bg-slate-900 border border-emerald-500/30 space-y-1">
+              <div class="flex items-center justify-between text-[10px] font-mono-code text-emerald-400">
+                <span>${sc.id}</span>
+                <span>Conf: ${(sc.confidence * 100).toFixed(0)}%</span>
+              </div>
+              <div class="text-xs text-slate-200 leading-snug">${sc.principle}</div>
+            </div>`
+          )
+          .join("");
+      }
+
+      // Tier 3 Procedural
+      const t3 = document.getElementById("tier3ProceduralList");
+      if (kernelState.proceduralSkills.length === 0) {
+        t3.innerHTML = `<div class="text-xs text-slate-500 italic p-2">No zero-token muscle skills compiled yet—trigger REM sleep consolidation.</div>`;
+      } else {
+        t3.innerHTML = kernelState.proceduralSkills
+          .map(
+            (sk) => `
+            <div class="p-2.5 rounded-lg bg-slate-900 border border-indigo-500/30 space-y-1 font-mono-code">
+              <div class="text-[11px] text-indigo-300 font-semibold">${sk.name}</div>
+              <div class="text-[10px] text-slate-400">${sk.trigger}</div>
+              <div class="text-[10px] text-emerald-300 bg-slate-950 px-2 py-1 rounded">&rarr; ${sk.op}</div>
+            </div>`
+          )
+          .join("");
+      }
+
+      // Audit Log
+      const logBox = document.getElementById("auditLogTable");
+      logBox.innerHTML = kernelState.auditLogs
+        .map(
+          (l) => `
+          <div class="p-2 rounded bg-slate-900/80 border border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300">[T${String(l.tick).padStart(2, "0")}]</span>
+              <span class="text-emerald-300 font-semibold">${l.winner}</span>
+              <span class="text-slate-300">${l.outcome}</span>
+            </div>
+            <span class="text-amber-300">F=${l.freeEnergy.toFixed(3)}J</span>
+          </div>`
+        )
+        .join("");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      kernelState = createInitialKernelState();
+      // Boot with 2 initial ticks so the dashboard is immediately rich
+      executeTick();
+      executeTick();
+
+      document.getElementById("btnStepTick").addEventListener("click", () => {
+        executeTick();
+        showToast(`Executed Autonomous Tick #${kernelState.tick} (Winner: ${kernelState.lastWinner.agent})`);
+      });
+
+      document.getElementById("btnAutoLoop").addEventListener("click", () => {
+        const label = document.getElementById("autoLoopLabel");
+        if (autoLoopTimer) {
+          clearInterval(autoLoopTimer);
+          autoLoopTimer = null;
+          label.innerHTML = "&#9654; Auto-Run Daemon";
+          showToast("Paused autonomous daemon loop.");
+        } else {
+          label.innerHTML = "&#9208; Pause Daemon";
+          autoLoopTimer = setInterval(() => {
+            executeTick();
+          }, 1600);
+          showToast("Autonomous daemon running (1 tick / 1.6s — zero human intervention).");
+        }
+      });
+
+      document.getElementById("btnInjectAnomaly").addEventListener("click", () => {
+        kernelState.homeostasis.epistemic_hunger = 0.96;
+        kernelState.homeostasis.zeigarnik_tension = 0.92;
+        kernelState.lastEureka = `Manual Epistemic Shock Injected: High-salience anomaly spike (ΔF = -0.740J)`;
+        executeTick("FORAGE_HYPOTHESIS");
+        showToast("Injected Epistemic Anomaly Shock — Explorer seized the Global Workspace Spotlight!");
+      });
+
+      document.getElementById("btnForceSleep").addEventListener("click", () => {
+        kernelState.homeostasis.memory_entropy = 0.92;
+        kernelState.homeostasis.cognitive_fatigue = 0.88;
+        executeTick("REM_CONSOLIDATE");
+        showToast("REM Sleep Consolidation executed: Episodic buffer distilled into Tier-2 Laws & Tier-3 Skills!");
+      });
+
+      document.getElementById("btnResetKernel").addEventListener("click", () => {
+        if (autoLoopTimer) {
+          clearInterval(autoLoopTimer);
+          autoLoopTimer = null;
+          document.getElementById("autoLoopLabel").innerHTML = "&#9654; Auto-Run Daemon";
+        }
+        kernelState = createInitialKernelState();
+        executeTick();
+        showToast("Reset NoesisOS Kernel to Genesis state.");
+      });
+
+      document.getElementById("btnExportSqlJson").addEventListener("click", () => {
+        const payload = JSON.stringify(kernelState, null, 2);
+        const ta = document.createElement("textarea");
+        ta.value = payload;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast("Copied full NoesisOS SQLite state snapshot JSON to clipboard!");
+        } catch (e) {
+          showToast("Snapshot ready.");
+        }
+        document.body.removeChild(ta);
+      });
+    });
+  </script>
+</body>
+</html>
