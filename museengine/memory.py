@@ -79,7 +79,7 @@ class MemoryStore:
 
     def add_episode(self, problem: str, summary: str, is_open: bool = True) -> Episode:
         now = time.time()
-        ep_id = "ep_" + hashlib.sha1(f"{problem}\0{now}".encode()).hexdigest()[:10]
+        ep_id = "ep_" + hashlib.sha256(f"{problem}\0{now}".encode()).hexdigest()[:10]
         with self.conn:
             self.conn.execute(
                 "INSERT INTO episodes (id, problem, summary, is_open, created_at) VALUES (?, ?, ?, ?, ?)",
